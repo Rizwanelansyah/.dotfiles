@@ -34,11 +34,11 @@
     "format": "{title}",
     "max-length": 40,
     "icon": true,
-    "icon-size": 24
+    "icon-size": 20
   },
   "clock": {
-    "format": " {:%H:%M:%S}",
-    "format-alt": " {:%A, %B %d, %Y ( %H:%M)}",
+    "format": "  {:%H:%M:%S}",
+    "format-alt": "  {:%A, %B %d, %Y (  %H:%M)}",
     "tooltip-format": "<tt><small>{calendar}</small></tt>",
     "calendar": {
       "mode": "year",
@@ -62,7 +62,7 @@
     }
   },
   "backlight": {
-    "format": "{icon} {percent}%",
+    "format": "{icon}  {percent}%",
     "format-icons": [
       "󰃞",
       "󰃝",
@@ -93,22 +93,22 @@
   "network": {
     "interval": 10,
     "format": "{ifname}",
-    "format-wifi": "󰖩 {essid} ({signalStrength}%)",
-    "format-ethernet": " {ipaddr}/{cidr}",
-    "format-disconnected": " Disconnected",
-    "tooltip-format": " {ifname} via {gwaddr}",
-    "tooltip-format-wifi": "󰖩 {essid} ({signalStrength}%)",
-    "tooltip-format-ethernet": " {ifname}",
-    "tooltip-format-disconnected": " Disconnected",
+    "format-wifi": "󰖩  {essid} ({signalStrength}%)",
+    "format-ethernet": "  {ipaddr}/{cidr}",
+    "format-disconnected": "  Disconnected",
+    "tooltip-format": "  {ifname} via {gwaddr}",
+    "tooltip-format-wifi": "󰖩  {essid} ({signalStrength}%)",
+    "tooltip-format-ethernet": "  {ifname}",
+    "tooltip-format-disconnected": "  Disconnected",
     "max-length": 30
   },
   "memory": {
     "interval": 10,
-    "format": " {used:0.1f}/{total:0.1f}G"
+    "format": "  {used:0.1f}/{total:0.1f}G"
   },
   "cpu": {
     "interval": 10,
-    "format": " {usage}%"
+    "format": "  {usage}%"
   },
   "battery": {
     "interval": 1,
@@ -116,8 +116,8 @@
       "warning": 30,
       "critical": 15
     },
-    "format": "{icon} {capacity}%",
-    "format-charging": " {capacity}%",
+    "format": "{icon}  {capacity}%",
+    "format-charging": "  {capacity}%",
     "format-icons": [
       "",
       "",

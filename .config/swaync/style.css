@@ -49,6 +49,10 @@
   margin: 8px;
 }
 
+.notification-row > * {
+  margin: 5px;
+}
+
 .control-center {
   box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.8), inset 0 0 0 1px @bg-alt;
   border-radius: 8px;

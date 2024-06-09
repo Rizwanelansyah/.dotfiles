@@ -1,16 +1,20 @@
 if status is-interactive
   export PATH="$PATH:$HOME/.local/bin"
   export PATH="$PATH:$HOME/.cargo/bin"
+  export PATH="$PATH:$HOME/go/bin"
 
   export FZF_DEFAULT_OPTS="--border --margin=1"
   export EDITOR="nvim"
-  export SUDO_PROMPT=(printf "$(set_color blue) sudo: $(set_color green)Password$(set_color normal)? $(set_color yellow) $(set_color normal)")
+  export SUDO_PROMPT=(printf "sudo: $(set_color blue)  $USER$(set_color green) Password$(set_color normal)? $(set_color yellow) $(set_color normal)")
   alias fishr "source ~/.config/fish/config.fish"
   alias rm "trash"
   alias ls "exa"
 end
 
 function fish_greeting
+  if test -e ~/scripts/hyprfetch
+    ~/scripts/hyprfetch 1
+  end
 end
 
 function fish_mode_prompt
