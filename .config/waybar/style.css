@@ -1,0 +1,139 @@
+@define-color black #000000;
+@define-color white #ffffff;
+@define-color red #eb6e67;
+@define-color green #95ee8f;
+@define-color yellow #f8c456;
+@define-color blue #6eaafb;
+@define-color magenta #d886f3;
+@define-color cyan #6cdcf7;
+@define-color emphasis #50536b;
+@define-color text #dfdfdf;
+@define-color text-alt #b2b2b2;
+@define-color fg #abb2bf;
+@define-color bg #282c34;
+@define-color bg-alt #252331;
+
+* {
+  padding: 1px 3px;
+  font-size: 11px;
+  min-height: 0;
+}
+
+window#waybar {
+  font-family: "CodeNewRoman Nerd Font";
+  color: @fg;
+  background: @bg;
+  border-radius: 2em;
+}
+
+#custom-os {
+  background: @blue;
+  color: @black;
+  border-radius: 3em;
+  padding: 0 10px;
+  margin: 2px 0;
+}
+
+#workspaces {
+  padding: 1px 5px 1px 1px;
+  margin: 0 10px;
+  border: 1px solid @text;
+  background: @bg-alt;
+  border-radius: 10px;
+}
+
+#workspaces button {
+  transition: .3s;
+  margin: 0;
+  color: @text;
+  border: none;
+}
+
+#workspaces button:hover {
+  text-shadow: 0 0 4px @text;
+  color: @cyan;
+  background: unset;
+}
+
+#workspaces button.active {
+  font-weight: bold;
+  color: @cyan;
+  text-shadow: 0 0 4px @text-alt;
+}
+
+#workspaces button.special {
+  border: 1px solid @green;
+}
+
+#clock,
+#custom-notification {
+  border-radius: 20px;
+  color: @black;
+  padding: 0 5px;
+  margin: 4px 2px;
+}
+
+#clock {
+  background: @green;
+}
+
+#custom-notification {
+  background: @yellow;
+}
+
+@keyframes blinking {
+  0% { opacity: 1; }
+  10% { opacity: .9; }
+  20% { opacity: .8; }
+  30% { opacity: .7; }
+  40% { opacity: .6; }
+  50% { opacity: .7; }
+  60% { opacity: .8; }
+  80% { opacity: .9; }
+  100% { opacity: 1; }
+}
+
+#battery,
+#memory,
+#cpu,
+#network,
+#backlight {
+  border-radius: 20px;
+  padding: 0 5px;
+  margin: 3px 4px;
+  color: @black;
+}
+
+#battery {
+  background: @cyan;
+}
+
+#battery.warning {
+  background: @yellow;
+}
+
+#battery.critical {
+  background: @red;
+  animation: blinking .3s infinite;
+}
+
+#battery.charging {
+  background: @green;
+  animation: none;
+}
+
+#memory {
+  background: @green;
+}
+
+#cpu {
+  background: @red;
+}
+
+#network {
+  background: @magenta;
+}
+
+#backlight {
+  background: @yellow;
+}
