@@ -3,6 +3,7 @@ Just a simple dotfiles for Arch+Hyprland with One Dark theme
 
 # Info
 - WM: Hyprland
+    - layout: dwindle
     - keybinds:
         - mainMod: SUPER
         - mainMod, Q: Open terminal with tmux
@@ -23,6 +24,8 @@ Just a simple dotfiles for Arch+Hyprland with One Dark theme
         - mainMod, RMB: Resize window
         - CTRL + mainMod, \[left|right|up|down\]: Move window to {x}
         - SHIFT + mainMod, \[left|right|up|down\]: Resize window to {x}
+        - mainMod, TAB: Dwindle - toggle split
+        - SHIFT + mainMod, TAB: Dwindle - swap split
 - Shell: Fish
     - alias:
         - rm => trash
@@ -35,7 +38,7 @@ Just a simple dotfiles for Arch+Hyprland with One Dark theme
 - Launcher: Rofi
 - Status Bar: Waybar
     - modules-left: custom/os, hyprland/workspace, hyprland/window
-    - modules-center: custom/notification, clock
+    - modules-center: custom/notification, clock, tray
     - modules-right: backlight, network, cpu, memory, battery
 - Notification Daemon: SwayNotificationCenter
 - Wallpaper: Swaybg

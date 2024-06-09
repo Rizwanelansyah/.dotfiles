@@ -19,6 +19,13 @@
   min-height: 0;
 }
 
+tooltip {
+  background: @bg;
+  opacity: .8;
+  border-radius: 10px;
+  box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.8), inset 0 0 0 1px @bg-alt;
+}
+
 window#waybar {
   font-family: "CodeNewRoman Nerd Font";
   color: @fg;

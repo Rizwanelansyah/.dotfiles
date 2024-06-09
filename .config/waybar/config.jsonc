@@ -7,7 +7,8 @@
   ],
   "modules-center": [
     "custom/notification",
-    "clock"
+    "clock",
+    "tray"
   ],
   "modules-right": [
     "backlight",
@@ -60,6 +61,10 @@
       "on-scroll-up": "shift_up",
       "on-scroll-down": "shift_down"
     }
+  },
+  "tray": {
+    "icon-size": 16,
+    "spacing": 5
   },
   "backlight": {
     "format": "{icon}  {percent}%",
