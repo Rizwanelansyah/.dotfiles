@@ -2,7 +2,7 @@
 # VERSION: 3.0
 SETUVAR __fish_initialized:3400
 SETUVAR _fisher_upgraded_to_4_4:\x1d
-SETUVAR fish_color_autosuggestion:brblack
+SETUVAR fish_color_autosuggestion:464C56
 SETUVAR fish_color_cancel:\x2dr
 SETUVAR fish_color_command:blue
 SETUVAR fish_color_comment:red

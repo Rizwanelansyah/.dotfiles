@@ -33,7 +33,7 @@ Just a simple dotfiles for Arch+Hyprland with One Dark theme
         - fishr => source ~/.config/fish/config.fish
     - function:
         - conf => select file/folder with fzf and configure selected folder/file with $EDITOR
-- Font: CodeNewRoman Nerd Font
+- Font: `CodeNewRoman Nerd Font` and `FiraCode Nerd Font`(for terminal emulator)
 - Color Scheme: One Dark
 - Launcher: Rofi
 - Status Bar: Waybar
@@ -43,7 +43,7 @@ Just a simple dotfiles for Arch+Hyprland with One Dark theme
 - Notification Daemon: SwayNotificationCenter
 - Wallpaper: Swaybg
     - image-source: [freepik.com](https://www.freepik.com/free-photos-vectors/abstract-wallpaper/3#uuid=ed999d21-075f-492c-bbe4-a4ad3edac321)
-- Terminal: Alacritty
+- Terminal Emulator: Kitty
 - Code Editor: Neovim
     - plugin-manager: lazy.nvim
     - leader: \<space\>

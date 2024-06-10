@@ -14,6 +14,7 @@ if status is-interactive
   alias rm "trash"
   alias ls "exa"
 
+  set fish_color_autosuggestion 464C56
   source ~/.config/fish/functions/utils.fish
 end
 
@@ -102,7 +103,7 @@ function fish_prompt
     printf " %s(%s $dep_dis%s)" (set_color normal) (set_color red) (set_color normal)
   end
 
-  printf "\n└─[%s$exit_code%s] " (set_color $exit_color) (set_color normal)
+  printf "\n└─[%s$exit_code%s]%s|>%s " (set_color $exit_color) (set_color normal) (set_color green) (set_color normal)
 end
 
 function fish_right_prompt

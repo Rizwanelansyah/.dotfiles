@@ -1,6 +1,6 @@
 function conf
   set -l conf_dirs ""
-  for dir in $HOME/.config/**/*
+  for dir in $HOME/.config/*
     set conf_dirs "$conf_dirs:$dir"
   end
   set -l selected_conf_dir (string split ":" $conf_dirs | fzf --no-multi --prompt "configure ")

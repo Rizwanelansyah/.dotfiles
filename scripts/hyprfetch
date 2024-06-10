@@ -11,7 +11,7 @@ cat << "EOF"
        A/     /   /    /B  \_____   C  ___D_______/ E/    F/    /             G/     / H|  \   |   I|   /    |    | R
       A/     /   /    /B        /  C /   D\    \   E/    /F\    \       _____G/     /  H|   \  |   I|   \____/    | R
      A+-----+   /    /B \______/  C /     D\    \_E/    /  F\    \_____/    G/     /   H|    \     I|             | R
-              A+---+B+           C /       D\     \E   /_   F\             G/     /_   H|     \    |I\_____      / R
+              A+---+B/           C /       D\     \E   /_   F\             G/     /_   H|     \    |I\_____      / R
         I_____      B\___________C_\       D/______\E __/    F\___________G/_______/H___|     /____|I     /     / R
         I\    \                                                                                  /     / R
          I\    `--------------------------------------------------------------------------------/     / R
@@ -51,4 +51,5 @@ if [ "$#" -gt 0 ] && [ $1 -ne 0 ]; then
 
   printf "\e[48;$yellow\e[38;$black  Kernel  \e[0m `uname -sr`\n"
   printf "\e[48;$purple\e[38;$black Packages \e[0m `pacman -Qq | wc -l`\n"
+  printf "\e[48;$green\e[38;$black  Uptime  \e[0m`uptime`\n"
 fi
