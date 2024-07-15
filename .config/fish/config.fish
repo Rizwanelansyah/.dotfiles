@@ -2,6 +2,9 @@ if status is-interactive
   export PATH="$PATH:$HOME/.local/bin"
   export PATH="$PATH:$HOME/.cargo/bin"
   export PATH="$PATH:$HOME/go/bin"
+  export PATH="$PATH:$HOME/.bin"
+  export PATH="$PATH:$HOME/Tools/zulu-jdk/bin"
+  export PATH="$PATH:$HOME/.config/composer/vendor/bin"
 
   # bun
   export BUN_INSTALL="$HOME/.bun"
@@ -62,7 +65,7 @@ function fish_prompt
       if test $crate -gt 1
         set unit "crates"
       end
-      printf " %s(%s %s$crate %s$unit%s)" \
+      printf " %s(%s %s$crate%s$unit%s)" \
       (set_color normal) (set_color white) (set_color blue) (set_color yellow) (set_color normal)
     end
   end
@@ -74,7 +77,7 @@ function fish_prompt
     set -l dep_dis ""
     if test "$deps " != " "
       if test $deps -gt 0
-        set dep_dis " $(set_color blue)$deps $(set_color cyan)dep"
+        set dep_dis " $(set_color blue)$deps$(set_color cyan)dep"
         if test $deps -gt 1
           set dep_dis $dep_dis"s"
         end
@@ -83,7 +86,7 @@ function fish_prompt
 
     if test "$dev_deps " != " "
       if test $dev_deps -gt 0
-        set dep_dis $dep_dis" $(set_color blue)$dev_deps $(set_color red)devDep"
+        set dep_dis $dep_dis" $(set_color blue)$dev_deps$(set_color red)devDep"
         if test $dev_deps -gt 1
           set dep_dis $dep_dis"s"
         end
@@ -93,7 +96,7 @@ function fish_prompt
     if test -e package-lock.json
       set -l packages (count_npm_packages)
       if test $packages -gt 0
-        set dep_dis $dep_dis" $(set_color blue)$packages $(set_color yellow)pkg"
+        set dep_dis $dep_dis" $(set_color blue)$packages$(set_color yellow)pkg"
         if test $packages -gt 1
           set dep_dis $dep_dis"s"
         end
@@ -103,7 +106,23 @@ function fish_prompt
     printf " %s(%s $dep_dis%s)" (set_color normal) (set_color red) (set_color normal)
   end
 
-  printf "\n└─[%s$exit_code%s]%s|>%s " (set_color $exit_color) (set_color normal) (set_color green) (set_color normal)
+  if test -e composer.json
+    set -l deps (count_composer_packages)
+
+    set -l dep_dis ""
+    if test "$deps " != " "
+      if test $deps -gt 0
+        set dep_dis " $(set_color blue)$deps$(set_color purple)pkg"
+        if test $deps -gt 1
+          set dep_dis $dep_dis"s"
+        end
+      end
+    end
+
+    printf " %s(%s󰌟 $dep_dis%s)" (set_color normal) (set_color purple) (set_color normal)
+  end
+
+  printf "\n└─[%s$exit_code%s]%s>%s " (set_color $exit_color) (set_color normal) (set_color green) (set_color normal)
 end
 
 function fish_right_prompt

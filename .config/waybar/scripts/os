@@ -1,7 +1,0 @@
-#!/bin/fish
-set -l tooltip ""
-for line in (cat /etc/os-release)
-  set tooltip "$tooltip\r$line"
-end
-
-printf "{ \"text\": \" Arch\", \"tooltip\": \"%s\" }" (string replace -a "\"" "\\\"" (string trim -chars="\r" --left $tooltip))

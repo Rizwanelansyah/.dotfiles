@@ -29,6 +29,10 @@ function count_npm_packages
   cat package-lock.json | jq -r ".packages" | jq length
 end
 
+function count_composer_packages
+  jq ".packages" < composer.lock | jq length
+end
+
 function fish_postexec --on-event fish_postexec
   set -l code $status
   if test "$code " != " "

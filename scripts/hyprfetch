@@ -40,16 +40,17 @@ get_title \
   | sed -r "s/R/`printf "\e[0m"`/g"
 
 if [ "$#" -gt 0 ] && [ $1 -ne 0 ]; then
+  reset="\e[0m"
   echo ""
-  printf "\e[48;$blue\e[38;$black   User   \e[0m `whoami`\n"
-  printf "\e[48;$red\e[38;$black   Host   \e[0m `uname -n`\n"
+  printf "\e[48;$blue\e[38;$black   User   $reset `whoami`\n"
+  printf "\e[48;$red\e[38;$black   Host   $reset `uname -n`\n"
 
   DISK_SIZE_TOTAL=$(df -kh . | tail -n1 | awk '{print $2}')
   DISK_SIZE_USED=$(df -kh . | tail -n1 | awk '{print $3}')
   DISK_PERCENT_USED=$(df -kh . | tail -n1 | awk '{print $5}')
-  printf "\e[48;$green\e[38;$black   Disk   \e[0m $DISK_SIZE_USED/$DISK_SIZE_TOTAL ($DISK_PERCENT_USED%)\n"
+  printf "\e[48;$green\e[38;$black   Disk   $reset $DISK_SIZE_USED/$DISK_SIZE_TOTAL ($DISK_PERCENT_USED%)\n"
 
-  printf "\e[48;$yellow\e[38;$black  Kernel  \e[0m `uname -sr`\n"
-  printf "\e[48;$purple\e[38;$black Packages \e[0m `pacman -Qq | wc -l`\n"
-  printf "\e[48;$green\e[38;$black  Uptime  \e[0m`uptime`\n"
+  printf "\e[48;$yellow\e[38;$black  Kernel  $reset `uname -sr`\n"
+  printf "\e[48;$purple\e[38;$black Packages $reset `pacman -Qq | wc -l`\n"
+  printf "\e[48;$green\e[38;$black  Uptime  $reset`uptime`\n"
 fi

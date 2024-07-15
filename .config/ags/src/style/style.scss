@@ -1,0 +1,209 @@
+$black: #282C34;
+$white: #DFDFDF;
+$blue: #6EAAFB;
+$yellow: #F8C456;
+$green: #95EE8F;
+$red: #EB6E67;
+
+@keyframes danger-blink {
+  0% {
+    opacity: .5;
+    font-size: 1.8em;
+  }
+
+  40% {
+    opacity: 1;
+    font-size: 1.3em;
+  }
+
+  100% {
+    opacity: .6;
+    font-size: 1.6em;
+  }
+}
+
+@keyframes blink {
+  0% {
+    opacity: .6;
+    font-size: 1.6em;
+  }
+
+  40% {
+    opacity: 1;
+    font-size: 1.3em;
+  }
+
+  100% {
+    opacity: .6;
+    font-size: 1.6em;
+  }
+}
+
+.status-bar {
+  background: $black;
+  color: $white;
+  font-family: "IosevkaTerm Nerd Font";
+  font-size: 10px;
+
+  .os-logo {
+    color: $blue;
+    font-size: 20px;
+    margin: 2px 5px;
+  }
+
+  .workspaces {
+    background: darken($black, 5%);
+    border-radius: 20px;
+    margin: 4px;
+    padding: 2px;
+    border: 1px solid lighten($white, 5%);
+
+    .workspace {
+      all: unset;
+      transition: background-color .5s, color .5s, padding .3s;
+      border-radius: 1em;
+      font-size: 14px;
+      min-width: 10px;
+      min-height: 10px;
+      padding: 0 4px;
+
+      &:hover {
+        padding: 0 8px;
+        background: lighten($black, 15%);
+      }
+
+      &.special {
+        background: $yellow;
+        color: $black;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+        padding-left: 6px;
+      }
+
+      &.active {
+        color: $black;
+        background: $blue;
+        min-width: 16px;
+        min-height: 16px;
+      }
+    }
+  }
+
+  .info-display {
+    margin: 0 1px;
+    padding: 2px 0.5em;
+    border-radius: 10px;
+    color: darken($black, 5%);
+    background: $white;
+    font-size: 1.1em;
+
+    * {
+      all: unset;
+    }
+  }
+
+  .info-display.time,
+  .info-display.date {
+    background: $green;
+  }
+
+  .power-button {
+    all: unset;
+    margin: 0 1px;
+    padding: 2px 0.4em;
+    border-radius: 10px;
+    color: darken($black, 5%);
+    background: $blue;
+    font-size: 1.1em;
+  }
+
+  .info-display.memory {
+    background: $red;
+  }
+
+  .battery {
+    .percentage {
+      font-size: 1.3em;
+    }
+
+    .bar {
+      block {
+        border: 1px solid $white;
+        border-radius: 20px;
+
+        &.filled {
+          margin: 2px;
+          border: none;
+          border-radius: 15px;
+          background: darken($blue, 10%);
+        }
+
+        &.empty {
+          background: $black;
+        }
+      }
+    }
+
+    .icon {
+      font-size: 1.3em;
+    }
+
+    .warning {
+      block.filled {
+        background: orange;
+      }
+    }
+
+    .danger {
+      block.filled {
+        background: red;
+      }
+
+      .icon {
+        animation: danger-blink 1s infinite;
+      }
+    }
+
+    .charging {
+      block.filled {
+        background: green;
+      }
+
+      .icon {
+        animation: blink 1s infinite;
+      }
+    }
+  }
+
+  .end {
+    padding: 0 20px 0 0;
+  }
+}
+
+.quick-menu {
+  background: darken($black, 8%);
+  border-radius: 3px;
+  padding: 5px;
+
+  button {
+    transition: font-size .1s, background .6s, min-width .8s;
+    background: darken($black, 4%);
+    border: 1px solid $white;
+    border-radius: 4px;
+
+    &:hover {
+      background: lighten($black, 6%);
+      font-size: 1.4em;
+    }
+
+    &.off {
+      color: $red;
+    }
+    &.restart {
+      color: $green;
+    }
+    &.logout {
+      color: lighten($red, 20%);
+    }
+  }
+}

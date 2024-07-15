@@ -1,0 +1,163 @@
+@keyframes danger-blink {
+  0% {
+    opacity: 0.5;
+    font-size: 1.8em;
+  }
+  40% {
+    opacity: 1;
+    font-size: 1.3em;
+  }
+  100% {
+    opacity: 0.6;
+    font-size: 1.6em;
+  }
+}
+@keyframes blink {
+  0% {
+    opacity: 0.6;
+    font-size: 1.6em;
+  }
+  40% {
+    opacity: 1;
+    font-size: 1.3em;
+  }
+  100% {
+    opacity: 0.6;
+    font-size: 1.6em;
+  }
+}
+.status-bar {
+  background: #282C34;
+  color: #DFDFDF;
+  font-family: "IosevkaTerm Nerd Font";
+  font-size: 10px;
+}
+.status-bar .os-logo {
+  color: #6EAAFB;
+  font-size: 20px;
+  margin: 2px 5px;
+}
+.status-bar .workspaces {
+  background: #1d2026;
+  border-radius: 20px;
+  margin: 4px;
+  padding: 2px;
+  border: 1px solid #ececec;
+}
+.status-bar .workspaces .workspace {
+  all: unset;
+  transition: background-color 0.5s, color 0.5s, padding 0.3s;
+  border-radius: 1em;
+  font-size: 14px;
+  min-width: 10px;
+  min-height: 10px;
+  padding: 0 4px;
+}
+.status-bar .workspaces .workspace:hover {
+  padding: 0 8px;
+  background: #49515f;
+}
+.status-bar .workspaces .workspace.special {
+  background: #F8C456;
+  color: #282C34;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  padding-left: 6px;
+}
+.status-bar .workspaces .workspace.active {
+  color: #282C34;
+  background: #6EAAFB;
+  min-width: 16px;
+  min-height: 16px;
+}
+.status-bar .info-display {
+  margin: 0 1px;
+  padding: 2px 0.5em;
+  border-radius: 10px;
+  color: #1d2026;
+  background: #DFDFDF;
+  font-size: 1.1em;
+}
+.status-bar .info-display * {
+  all: unset;
+}
+.status-bar .info-display.time,
+.status-bar .info-display.date {
+  background: #95EE8F;
+}
+.status-bar .power-button {
+  all: unset;
+  margin: 0 1px;
+  padding: 2px 0.4em;
+  border-radius: 10px;
+  color: #1d2026;
+  background: #6EAAFB;
+  font-size: 1.1em;
+}
+.status-bar .info-display.memory {
+  background: #EB6E67;
+}
+.status-bar .battery .percentage {
+  font-size: 1.3em;
+}
+.status-bar .battery .bar block {
+  border: 1px solid #DFDFDF;
+  border-radius: 20px;
+}
+.status-bar .battery .bar block.filled {
+  margin: 2px;
+  border: none;
+  border-radius: 15px;
+  background: #3c8dfa;
+}
+.status-bar .battery .bar block.empty {
+  background: #282C34;
+}
+.status-bar .battery .icon {
+  font-size: 1.3em;
+}
+.status-bar .battery .warning block.filled {
+  background: orange;
+}
+.status-bar .battery .danger block.filled {
+  background: red;
+}
+.status-bar .battery .danger .icon {
+  animation: danger-blink 1s infinite;
+}
+.status-bar .battery .charging block.filled {
+  background: green;
+}
+.status-bar .battery .charging .icon {
+  animation: blink 1s infinite;
+}
+.status-bar .end {
+  padding: 0 20px 0 0;
+}
+
+.quick-menu {
+  background: #16181d;
+  border-radius: 3px;
+  padding: 5px;
+}
+.quick-menu button {
+  transition: font-size 0.1s, background 0.6s, min-width 0.8s;
+  background: #1f2228;
+  border: 1px solid #DFDFDF;
+  border-radius: 4px;
+}
+.quick-menu button:hover {
+  background: #353b45;
+  font-size: 1.4em;
+}
+.quick-menu button.off {
+  color: #EB6E67;
+}
+.quick-menu button.restart {
+  color: #95EE8F;
+}
+.quick-menu button.logout {
+  color: #f7c4c1;
+}
+
+/*# sourceMappingURL=style.css.map */
