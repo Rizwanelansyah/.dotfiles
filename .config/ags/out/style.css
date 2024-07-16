@@ -26,10 +26,13 @@
     font-size: 1.6em;
   }
 }
+* {
+  font-family: "IosevkaTerm Nerd Font";
+}
+
 .status-bar {
   background: #282C34;
   color: #DFDFDF;
-  font-family: "IosevkaTerm Nerd Font";
   font-size: 10px;
 }
 .status-bar .os-logo {
@@ -78,7 +81,7 @@
   background: #DFDFDF;
   font-size: 1.1em;
 }
-.status-bar .info-display * {
+.status-bar .info-display button {
   all: unset;
 }
 .status-bar .info-display.time,
@@ -96,6 +99,12 @@
 }
 .status-bar .info-display.memory {
   background: #EB6E67;
+}
+.status-bar .info-display.network {
+  background: #9F4E9F;
+}
+.status-bar .info-display.audio {
+  background: #6EAAFB;
 }
 .status-bar .battery .percentage {
   font-size: 1.3em;
@@ -135,29 +144,182 @@
   padding: 0 20px 0 0;
 }
 
+#quick-menu {
+  background: transparent;
+}
+
 .quick-menu {
-  background: #16181d;
-  border-radius: 3px;
-  padding: 5px;
+  background: #282C34;
+  border-radius: 5px;
+  margin: 10px;
+  padding: 10px;
+  box-shadow: 0 0 3px rgba(223, 223, 223, 0.5);
 }
-.quick-menu button {
-  transition: font-size 0.1s, background 0.6s, min-width 0.8s;
+.quick-menu > button {
+  all: unset;
+  border: none;
+  transition: 0.5s;
+  font-size: 1.5em;
   background: #1f2228;
-  border: 1px solid #DFDFDF;
   border-radius: 4px;
+  min-height: 60px;
+  min-width: 60px;
+  padding: 0;
 }
-.quick-menu button:hover {
-  background: #353b45;
-  font-size: 1.4em;
+.quick-menu > button:hover {
+  background: #121417;
 }
-.quick-menu button.off {
+.quick-menu > button.off {
   color: #EB6E67;
 }
-.quick-menu button.restart {
+.quick-menu > button.restart {
   color: #95EE8F;
 }
-.quick-menu button.logout {
-  color: #f7c4c1;
+.quick-menu > button.logout {
+  color: #F1A781;
+}
+.quick-menu .day-month {
+  margin: 5px;
+}
+.quick-menu .day-month label {
+  font-size: 5rem;
+}
+.quick-menu .day-month separator {
+  min-height: 4px;
+  background: #DFDFDF;
+}
+.quick-menu .battery {
+  margin: 10px;
+  font-size: 5px;
+  background: #1d2026;
+  color: #95EE8F;
+}
+.quick-menu .battery .percentage {
+  font-size: 3rem;
+}
+.quick-menu .volume .icon,
+.quick-menu .brightness .icon {
+  all: unset;
+  font-size: 2rem;
+}
+.quick-menu .volume .percentage,
+.quick-menu .brightness .percentage {
+  font-size: 1.5rem;
+  min-width: 4em;
+}
+.quick-menu .volume .slider,
+.quick-menu .brightness .slider {
+  margin: 5px;
+}
+.quick-menu .volume .slider contents trough,
+.quick-menu .brightness .slider contents trough {
+  background: #333842;
+  border-radius: 5px;
+}
+.quick-menu .volume .slider contents trough slider,
+.quick-menu .brightness .slider contents trough slider {
+  transition: 0.8s;
+  background-image: none;
+}
+.quick-menu .volume .slider contents trough slider:hover,
+.quick-menu .brightness .slider contents trough slider:hover {
+  background-image: radial-gradient(circle, #6EAAFB, #6EAAFB, transparent, transparent, transparent);
+}
+.quick-menu .volume .slider contents trough highlight,
+.quick-menu .brightness .slider contents trough highlight {
+  background: #6EAAFB;
+  min-height: 5px;
+  border-radius: 5px;
+}
+.quick-menu .previewer {
+  background: #1d2026;
+  border-radius: 10px;
+  min-height: 150px;
+}
+.quick-menu .wifi {
+  color: #9F4E9F;
+}
+.quick-menu .wifi.active {
+  background: #9F4E9F;
+  color: #1f2228;
+}
+.quick-menu .bluetooth {
+  color: #6EAAFB;
+}
+.quick-menu .bluetooth.active {
+  background: #6EAAFB;
+  color: #1f2228;
+}
+.quick-menu .do-not-disturb {
+  color: #F8C456;
+}
+.quick-menu .do-not-disturb.active {
+  background: #F8C456;
+  color: #1f2228;
+}
+.quick-menu .os-logo,
+.quick-menu .wm-logo {
+  font-size: 5rem;
+  color: #6EAAFB;
+}
+.quick-menu .system-info {
+  background: #3c8dfa;
+  color: #282C34;
+  border-radius: 10px;
+  padding: 5px;
+  margin: 10px 0;
+}
+
+#app-launcher {
+  background: transparent;
+}
+
+.app-launcher {
+  background: #282C34;
+  min-width: 400px;
+  min-height: 600px;
+  padding: 10px;
+  border-radius: 10px;
+}
+.app-launcher .search-bar {
+  margin: 3px;
+  padding: 0 1px 5px 1px;
+}
+.app-launcher .search-bar .icon {
+  background: #6EAAFB;
+  color: #282C34;
+  padding: 1px 10px;
+  border-radius: 10px 0 0 10px;
+  font-size: 1.2rem;
+}
+.app-launcher .search-bar entry {
+  all: unset;
+  background: #1d2026;
+  border-radius: 0 10px 10px 0;
+  padding: 5px;
+  font-size: 1.2rem;
+}
+.app-launcher .apps .list .app-item {
+  all: unset;
+  border: none;
+}
+.app-launcher .apps .list .app-item .title {
+  font-size: 1.3rem;
+  background: #333842;
+  border-radius: 0 10px 10px 0;
+  padding: 5px;
+}
+.app-launcher .apps .list .app-item .icon {
+  background: #333842;
+  border-radius: 10px 0 0 10px;
+  padding: 5px;
+}
+.app-launcher .apps .list .app-item:focus .title {
+  background: #6EAAFB;
+  color: #282C34;
+}
+.app-launcher .apps .list .app-item:focus .icon {
+  background: #3e4451;
 }
 
 /*# sourceMappingURL=style.css.map */

@@ -4,6 +4,8 @@ $blue: #6EAAFB;
 $yellow: #F8C456;
 $green: #95EE8F;
 $red: #EB6E67;
+$purple: #9F4E9F;
+$orange: #F1A781;
 
 @keyframes danger-blink {
   0% {
@@ -39,10 +41,13 @@ $red: #EB6E67;
   }
 }
 
+* {
+  font-family: "IosevkaTerm Nerd Font";
+}
+
 .status-bar {
   background: $black;
   color: $white;
-  font-family: "IosevkaTerm Nerd Font";
   font-size: 10px;
 
   .os-logo {
@@ -97,7 +102,7 @@ $red: #EB6E67;
     background: $white;
     font-size: 1.1em;
 
-    * {
+    button {
       all: unset;
     }
   }
@@ -119,6 +124,14 @@ $red: #EB6E67;
 
   .info-display.memory {
     background: $red;
+  }
+
+  .info-display.network {
+    background: $purple;
+  }
+
+  .info-display.audio {
+    background: $blue;
   }
 
   .battery {
@@ -180,30 +193,212 @@ $red: #EB6E67;
   }
 }
 
-.quick-menu {
-  background: darken($black, 8%);
-  border-radius: 3px;
-  padding: 5px;
+#quick-menu {
+  background: transparent;
+}
 
-  button {
-    transition: font-size .1s, background .6s, min-width .8s;
-    background: darken($black, 4%);
-    border: 1px solid $white;
+.quick-menu {
+  $bg: $black;
+
+  @mixin toggleButton($color) {
+    color: $color;
+
+    &.active {
+      background: $color;
+      color: darken($bg, 4%);
+    }
+  }
+
+  background: $bg;
+  border-radius: 5px;
+  margin: 10px;
+  padding: 10px;
+  box-shadow: 0 0 3px transparentize($white, 0.5);
+
+  &>button {
+    all: unset;
+    border: none;
+    transition: .5s;
+    font-size: 1.5em;
+    background: darken($bg, 4%);
     border-radius: 4px;
+    min-height: 60px;
+    min-width: 60px;
+    padding: 0;
 
     &:hover {
-      background: lighten($black, 6%);
-      font-size: 1.4em;
+      background: darken($bg, 10%);
     }
 
     &.off {
       color: $red;
     }
+
     &.restart {
       color: $green;
     }
+
     &.logout {
-      color: lighten($red, 20%);
+      color: $orange;
+    }
+  }
+
+  .day-month {
+    margin: 5px;
+
+    label {
+      font-size: 5rem;
+    }
+
+    separator {
+      min-height: 4px;
+      background: $white;
+    }
+  }
+
+  .battery {
+    margin: 10px;
+    font-size: 5px;
+    background: darken($bg, 5%);
+    color: $green;
+
+    .percentage {
+      font-size: 3rem;
+    }
+  }
+
+  .volume,
+  .brightness {
+    .icon {
+      all: unset;
+      font-size: 2rem;
+    }
+
+    .percentage {
+      font-size: 1.5rem;
+      min-width: 4em;
+    }
+
+    .slider {
+      margin: 5px;
+
+      contents trough {
+        background: lighten($bg, 5%);
+        border-radius: 5px;
+
+        slider {
+          transition: .8s;
+          background-image: none;
+
+          &:hover {
+            background-image: radial-gradient(circle, $blue, $blue, transparent, transparent, transparent);
+          }
+        }
+
+        highlight {
+          background: $blue;
+          min-height: 5px;
+          border-radius: 5px;
+        }
+      }
+    }
+  }
+
+  .previewer {
+    background: darken($black, 5%);
+    border-radius: 10px;
+    min-height: 150px;
+  }
+
+  .wifi {
+    @include toggleButton($purple);
+  }
+
+  .bluetooth {
+    @include toggleButton($blue);
+  }
+
+  .do-not-disturb {
+    @include toggleButton($yellow);
+  }
+
+  .os-logo,
+  .wm-logo {
+    font-size: 5rem;
+    color: $blue;
+  }
+
+  .system-info {
+    background: darken($blue, 10%);
+    color: $black;
+    border-radius: 10px;
+    padding: 5px;
+    margin: 10px 0;
+  }
+}
+
+#app-launcher {
+  background: transparent;
+}
+
+.app-launcher {
+  background: $black;
+  min-width: 400px;
+  min-height: 600px;
+  padding: 10px;
+  border-radius: 10px;
+
+  .search-bar {
+    margin: 3px;
+    padding: 0 1px 5px 1px;
+
+    .icon {
+      background: $blue;
+      color: $black;
+      padding: 1px 10px;
+      border-radius: 10px 0 0 10px;
+      font-size: 1.2rem;
+    }
+
+    entry {
+      all: unset;
+      background: darken($black, 5%);
+      border-radius: 0 10px 10px 0;
+      padding: 5px;
+      font-size: 1.2rem;
+    }
+  }
+
+  .apps {
+    .list {
+      .app-item {
+        all: unset;
+        border: none;
+        $bg: lighten($black, 5%);
+
+        .title {
+          font-size: 1.3rem;
+          background: $bg;
+          border-radius: 0 10px 10px 0;
+          padding: 5px;
+        }
+
+        .icon {
+          background: $bg;
+          border-radius: 10px 0 0 10px;
+          padding: 5px;
+        }
+
+        &:focus {
+          .title {
+            background: $blue;
+            color: $black;
+          }
+          .icon {
+            background: lighten($bg, 5%);
+          }
+        }
+      }
     }
   }
 }
