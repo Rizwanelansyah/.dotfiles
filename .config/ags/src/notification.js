@@ -1,16 +1,15 @@
 const notifications = await Service.import("notifications")
+const altTimeOut = 5000
 
 function NotificationIcon({ app_entry, app_icon, image }) {
   if (image) {
-    return Widget.Box({
-      css: `background-image: url("${image}");`
-        + "background-size: contain;"
-        + "background-repeat: no-repeat;"
-        + "background-position: center;",
+    return Widget.Icon({
+      className: "icon",
+      icon: image,
     })
   }
 
-  let icon = "dialog-information-symbolic"
+  let icon = null
   if (Utils.lookUpIcon(app_icon))
     icon = app_icon
 
@@ -18,73 +17,81 @@ function NotificationIcon({ app_entry, app_icon, image }) {
     icon = app_entry
 
   return Widget.Box({
-    child: Widget.Icon(icon),
+    hexpand: true,
+    vexpand: true,
+    child: icon ? Widget.Icon({
+      className: "icon",
+      icon,
+    }) : Widget.Label({
+      className: "nerd-icon",
+      label: " ",
+    }),
   })
 }
 
 function Notification(n) {
-  const icon = Widget.Box({
-    vpack: "start",
-    class_name: "icon",
-    child: NotificationIcon(n),
+  const Content = Widget.Box({
+    children: [
+      NotificationIcon(n),
+      Widget.Box({
+        className: "content",
+        vertical: true,
+        spacing: 4,
+        children: [
+          Widget.Label({
+            maxWidthChars: 30,
+            truncate: "end",
+            className: "title",
+            xalign: 0,
+            label: n.summary,
+          }),
+          Widget.Label({
+            maxWidthChars: 30,
+            className: "body",
+            wrap: true,
+            xalign: 0,
+            label: n.body,
+          }),
+        ],
+      })
+    ],
   })
 
-  const title = Widget.Label({
-    class_name: "title",
-    xalign: 0,
-    justification: "left",
+  const Actions = Widget.Box({
+    className: "actions",
     hexpand: true,
-    max_width_chars: 24,
-    truncate: "end",
-    wrap: true,
-    label: n.summary,
-    use_markup: true,
-  })
-
-  const body = Widget.Label({
-    class_name: "body",
-    hexpand: true,
-    use_markup: true,
-    xalign: 0,
-    justification: "left",
-    label: n.body,
-    wrap: true,
-  })
-
-  const actions = Widget.Box({
-    class_name: "actions",
+    spacing: 4,
     children: n.actions.map(({ id, label }) => Widget.Button({
-      class_name: "action-button",
-      on_clicked: () => {
+      label,
+      hexpand: true,
+      onClicked: () => {
         n.invoke(id)
         n.dismiss()
+        n.close()
       },
-      hexpand: true,
-      child: Widget.Label(label),
     })),
   })
 
-  return Widget.EventBox(
-    {
-      attribute: { id: n.id },
-      on_primary_click: n.dismiss,
-    },
-    Widget.Box(
-      {
-        class_name: `notification ${n.urgency}`,
-        vertical: true,
-      },
-      Widget.Box([
-        icon,
-        Widget.Box(
-          { vertical: true },
-          title,
-          body,
-        ),
-      ]),
-      actions,
-    ),
-  )
+  return Widget.Box({
+    className: "notification",
+    vertical: true,
+    attribute: n,
+    spacing: 5,
+    children: [
+      Widget.EventBox({
+        child: Content,
+        onPrimaryClick: () => {
+          n.dismiss()
+        }
+      }),
+      Actions,
+    ],
+    setup: self => {
+      Utils.timeout(altTimeOut, () => {
+        self.destroy()
+      })
+    }
+  })
 }
 
 const list = Widget.Box({
@@ -110,7 +117,7 @@ export default Widget.Window({
   monitor: 0,
   name: "notification",
   class_name: "notification-popups",
-  anchor: ["top", "right"],
+  anchor: ["top", "bottom", "right"],
   child: Widget.Box({
     css: "min-width: 2px; min-height: 2px;",
     class_name: "notifications",

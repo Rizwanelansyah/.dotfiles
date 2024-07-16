@@ -172,6 +172,7 @@ Menu.attach(Widget.Box({
   vertical: true,
   vexpand: true,
   hexpand: true,
+  vpack: "center",
   children: [
     Widget.Label({ label: date.bind().as(d => d.day < 10 ? `0${d.day}` : `${d.day}`) }),
     Widget.Separator({ vertical: true }),
@@ -215,17 +216,17 @@ const NotifItem = (n) => Widget.Box({
     Widget.Button({
       className: "title",
       hexpand: true,
-      label: n.summary,
+      child: Widget.Label({
+        maxWidthChars: 10,
+        truncate: "end",
+        xalign: 0,
+        label: n.summary,
+      }),
       cursor: "pointer",
       onPrimaryClick: (self, event) => {
         if (n.actions.length < 1)
           return
         const menu = Widget.Menu({
-          children: [
-            Widget.MenuItem({
-              child: Widget.Label('hello'),
-            }),
-          ],
           children: n.actions.map(({ id, label }) => Widget.MenuItem({
             child: Widget.Label(label),
             onActivate: () => {
@@ -253,7 +254,24 @@ const Notifications = Widget.Box({
   spacing: 4,
   children: notifications.notifications.map(NotifItem)
 }).hook(notifications, self => {
-  self.children = notifications.notifications.map(NotifItem)
+  if (notifications.notifications.length < 1) {
+    self.children = [Widget.Box({
+      className: "empty",
+      vertical: true,
+      children: [
+        Widget.Label({
+          label: "󰒲 ",
+          className: "icon",
+        }),
+        Widget.Label({
+          label: "Notif Is Empty.",
+          className: "title",
+        }),
+      ],
+    })]
+  } else {
+    self.children = notifications.notifications.map(NotifItem)
+  }
 })
 
 Menu.attach(Widget.Scrollable({

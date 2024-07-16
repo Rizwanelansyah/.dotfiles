@@ -14,5 +14,5 @@ await App.config({
     QuickMenu,
     AppLauncher,
     Notification,
-  ]
+  ],
 })

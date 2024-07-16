@@ -285,6 +285,17 @@
   padding: 4px;
   margin-right: 10px;
 }
+.quick-menu .notifications .notif-item .icon {
+  font-size: 1.5rem;
+  margin: 5px;
+  margin-right: 1em;
+}
+.quick-menu .notifications .empty .icon {
+  font-size: 7rem;
+}
+.quick-menu .notifications .empty .title {
+  font-size: 1.5rem;
+}
 
 #app-launcher {
   background: transparent;
@@ -339,51 +350,26 @@
 }
 
 window.notification-popups box.notifications {
-  padding: 0.5em;
-}
-window.notification-popups .icon {
-  min-width: 68px;
-  min-height: 68px;
-  margin-right: 1em;
-}
-window.notification-popups .icon image {
-  font-size: 68px;
-  margin: 5px;
-  color: #DFDFDF;
-}
-window.notification-popups .icon box {
-  min-width: 68px;
-  min-height: 68px;
-  border-radius: 7px;
-}
-window.notification-popups .notification {
-  min-width: 350px;
-  border-radius: 11px;
   padding: 1em;
-  margin: 0.5em;
+}
+window.notification-popups box.notifications .notification {
+  padding: 1em;
+  border-radius: 10px;
   border: 1px solid #6EAAFB;
-  background-color: #333842;
+  background: #282C34;
 }
-window.notification-popups .notification.critical {
-  border: 1px solid lightcoral;
+window.notification-popups box.notifications .notification .title {
+  font-size: 1.3rem;
 }
-window.notification-popups .title {
-  color: #c6c6c6;
-  font-size: 1.2rem;
-  font-weight: bold;
+window.notification-popups box.notifications .notification .icon {
+  padding-right: 1rem;
+  min-width: 50px;
+  min-height: 50px;
+  font-size: 50px;
 }
-window.notification-popups .body {
-  color: #DFDFDF;
-}
-window.notification-popups .actions .action-button {
-  margin: 0 0.4em;
-  margin-top: 0.8em;
-}
-window.notification-popups .actions .action-button:first-child {
-  margin-left: 0;
-}
-window.notification-popups .actions .action-button:last-child {
-  margin-right: 0;
+window.notification-popups box.notifications .notification .nerd-icon {
+  padding-right: 1rem;
+  font-size: 50px;
 }
 
 /*# sourceMappingURL=style.css.map */

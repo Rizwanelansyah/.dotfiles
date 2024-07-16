@@ -354,6 +354,22 @@ $orange: #F1A781;
         padding: 4px;
         margin-right: 10px;
       }
+
+      .icon {
+        font-size: 1.5rem;
+        margin: 5px;
+        margin-right: 1em;
+      }
+    }
+
+    .empty {
+      .icon {
+        font-size: 7rem;
+      }
+
+      .title {
+        font-size: 1.5rem;
+      }
     }
   }
 }
@@ -427,60 +443,28 @@ $orange: #F1A781;
 
 window.notification-popups {
   box.notifications {
-    padding: .5em;
-  }
-
-  .icon {
-    min-width: 68px;
-    min-height: 68px;
-    margin-right: 1em;
-
-    image {
-      font-size: 68px;
-      margin: 5px;
-      color: $white;
-    }
-
-    box {
-      min-width: 68px;
-      min-height: 68px;
-      border-radius: 7px;
-    }
-  }
-
-  .notification {
-    min-width: 350px;
-    border-radius: 11px;
     padding: 1em;
-    margin: .5em;
-    border: 1px solid $blue;
-    background-color: lighten($black, 5%);
 
-    &.critical {
-      border: 1px solid lightcoral;
-    }
-  }
+    .notification {
+      padding: 1em;
+      border-radius: 10px;
+      border: 1px solid $blue;
+      background: $black;
 
-  .title {
-    color: darken($white, 10%);
-    font-size: 1.2rem;
-    font-weight: bold;
-  }
+      .title {
+        font-size: 1.3rem;
+      }
 
-  .body {
-    color: $white;
-  }
-
-  .actions .action-button {
-    margin: 0 .4em;
-    margin-top: .8em;
-
-    &:first-child {
-      margin-left: 0;
-    }
-
-    &:last-child {
-      margin-right: 0;
+      .icon {
+        padding-right: 1rem;
+        min-width: 50px;
+        min-height: 50px;
+        font-size: 50px;
+      }
+      .nerd-icon {
+        padding-right: 1rem;
+        font-size: 50px;
+      }
     }
   }
 }
