@@ -1,6 +1,7 @@
 import StatusBar from './src/statusBar.js'
 import QuickMenu from './src/quickMenu.js'
 import AppLauncher from './src/appLauncher.js'
+import Notification from './src/notification.js'
 
 const scss = `${App.configDir}/src/style/style.scss`
 const css = `${App.configDir}/out/style.css`
@@ -12,5 +13,6 @@ await App.config({
     StatusBar,
     QuickMenu,
     AppLauncher,
+    Notification,
   ]
 })

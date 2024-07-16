@@ -6,6 +6,7 @@ const audio = await Service.import("audio")
 const network = await Service.import("network")
 const bluetooth = await Service.import("bluetooth")
 const battery = await Service.import("battery")
+const notifications = await Service.import("notifications")
 
 const Grid = Widget.subclass(Gtk.Grid)
 const date = Variable({ day: 0, month: 0, year: 0, dayName: "", monthName: "" })
@@ -126,12 +127,13 @@ Menu.attach(Widget.Button({
 
 Menu.attach(Widget.Button({
   className: "do-not-disturb",
-  attribute: false,
+  attribute: notifications.dnd,
   label: " ",
   tooltipText: "Do Not Disturb",
   cursor: "pointer",
   onClicked: self => {
     self.attribute = !self.attribute
+    notifications.dnd = self.attribute
     self.toggleClassName("active", self.attribute)
     if (self.attribute) {
       self.label = "󰂛 "
@@ -202,19 +204,70 @@ Menu.attach(Widget.Label({
   label: " ",
 }), 3, 14, 1, 1)
 
-Menu.attach(Widget.Box({
-  className: "system-info",
+const NotifItem = (n) => Widget.Box({
+  attribute: n,
+  className: "notif-item",
+  children: [
+    Widget.Icon({
+      className: "icon",
+      icon: n.appIcon,
+    }),
+    Widget.Button({
+      className: "title",
+      hexpand: true,
+      label: n.summary,
+      cursor: "pointer",
+      onPrimaryClick: (self, event) => {
+        if (n.actions.length < 1)
+          return
+        const menu = Widget.Menu({
+          children: [
+            Widget.MenuItem({
+              child: Widget.Label('hello'),
+            }),
+          ],
+          children: n.actions.map(({ id, label }) => Widget.MenuItem({
+            child: Widget.Label(label),
+            onActivate: () => {
+              n.invoke(id)
+              n.close()
+            }
+          }))
+        })
+        menu.popup_at_pointer(event)
+      },
+    }),
+    Widget.Button({
+      className: "dismiss",
+      label: " ",
+      cursor: "pointer",
+      onClicked: () => {
+        n.close()
+      }
+    })
+  ],
+})
+
+const Notifications = Widget.Box({
+  vertical: true,
+  spacing: 4,
+  children: notifications.notifications.map(NotifItem)
+}).hook(notifications, self => {
+  self.children = notifications.notifications.map(NotifItem)
+})
+
+Menu.attach(Widget.Scrollable({
+  className: "notifications",
   hexpand: true,
   vexpand: true,
-  children: [
-  ],
+  child: Notifications,
 }), 1, 13, 2, 2)
 
 export default Widget.Window({
   monitor: 0,
   name: "quick-menu",
-  widthRequest: 300,
-  heightRequest: 500,
+  widthRequest: 350,
+  heightRequest: 600,
   anchor: ["top", "right"],
   layer: "overlay",
   keymode: "on-demand",

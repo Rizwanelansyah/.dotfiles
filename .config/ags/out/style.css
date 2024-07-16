@@ -88,7 +88,10 @@
 .status-bar .info-display.date {
   background: #95EE8F;
 }
-.status-bar .power-button {
+.status-bar .tray .item {
+  all: unset;
+}
+.status-bar .menu-button {
   all: unset;
   margin: 0 1px;
   padding: 2px 0.4em;
@@ -195,7 +198,7 @@
   color: #95EE8F;
 }
 .quick-menu .battery .percentage {
-  font-size: 3rem;
+  font-size: 4rem;
 }
 .quick-menu .volume .icon,
 .quick-menu .brightness .icon {
@@ -231,11 +234,6 @@
   min-height: 5px;
   border-radius: 5px;
 }
-.quick-menu .previewer {
-  background: #1d2026;
-  border-radius: 10px;
-  min-height: 150px;
-}
 .quick-menu .wifi {
   color: #9F4E9F;
 }
@@ -262,12 +260,30 @@
   font-size: 5rem;
   color: #6EAAFB;
 }
-.quick-menu .system-info {
+.quick-menu .notifications {
   background: #3c8dfa;
   color: #282C34;
   border-radius: 10px;
   padding: 5px;
   margin: 10px 0;
+}
+.quick-menu .notifications .notif-item {
+  background: #282C34;
+  padding: 3px;
+  color: #DFDFDF;
+  border-radius: 10px;
+}
+.quick-menu .notifications .notif-item .title {
+  all: unset;
+  font-size: 1.3rem;
+}
+.quick-menu .notifications .notif-item .dismiss {
+  all: unset;
+  font-size: 1.5rem;
+  color: #EB6E67;
+  background: #282C34;
+  padding: 4px;
+  margin-right: 10px;
 }
 
 #app-launcher {
@@ -320,6 +336,54 @@
 }
 .app-launcher .apps .list .app-item:focus .icon {
   background: #3e4451;
+}
+
+window.notification-popups box.notifications {
+  padding: 0.5em;
+}
+window.notification-popups .icon {
+  min-width: 68px;
+  min-height: 68px;
+  margin-right: 1em;
+}
+window.notification-popups .icon image {
+  font-size: 68px;
+  margin: 5px;
+  color: #DFDFDF;
+}
+window.notification-popups .icon box {
+  min-width: 68px;
+  min-height: 68px;
+  border-radius: 7px;
+}
+window.notification-popups .notification {
+  min-width: 350px;
+  border-radius: 11px;
+  padding: 1em;
+  margin: 0.5em;
+  border: 1px solid #6EAAFB;
+  background-color: #333842;
+}
+window.notification-popups .notification.critical {
+  border: 1px solid lightcoral;
+}
+window.notification-popups .title {
+  color: #c6c6c6;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+window.notification-popups .body {
+  color: #DFDFDF;
+}
+window.notification-popups .actions .action-button {
+  margin: 0 0.4em;
+  margin-top: 0.8em;
+}
+window.notification-popups .actions .action-button:first-child {
+  margin-left: 0;
+}
+window.notification-popups .actions .action-button:last-child {
+  margin-right: 0;
 }
 
 /*# sourceMappingURL=style.css.map */

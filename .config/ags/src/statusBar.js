@@ -3,6 +3,7 @@ const battery = await Service.import("battery")
 const apps = await Service.import("applications")
 const audio = await Service.import('audio')
 const network = await Service.import('network')
+const systemtray = await Service.import('systemtray')
 
 const kiloToGiga = (kilo, trail = 1) => Math.floor(kilo / (1_000_000 / (Math.pow(10, trail)))) / Math.pow(10, trail)
 
@@ -163,8 +164,25 @@ Utils.interval(1000, async () => {
 const TimeInfo = infoDisplay("time", " ", Widget.Label({ label: dateTime.bind().as(dt => dt.split("-")[0]) }))
 const DateInfo = infoDisplay("date", " ", Widget.Label({ label: dateTime.bind().as(dt => dt.split("-")[1]) }))
 
+const SysTrayItem = item => Widget.Button({
+  className: "item",
+  child: Widget.Icon({
+    className: "icon",
+    icon: item.icon,
+    size: 20,
+  }),
+  tooltipMarkup: item.bind('tooltip_markup'),
+  onPrimaryClick: (_, event) => item.activate(event),
+  onSecondaryClick: (_, event) => item.openMenu(event),
+});
+
+const SysTray = Widget.Box({
+  className: "tray",
+  children: systemtray.bind('items').as(i => i.map(SysTrayItem))
+})
+
 const memory = Variable({ free: 0, used: 0, total: 0 })
-Utils.interval(1000, async () => {
+Utils.interval(5000, async () => {
   const [total, _, free] = Utils.exec("bash -c \"head -n 3 /proc/meminfo | awk '{print $2;}'\"").split("\n")
   memory.value = {
     total: Number(total),
@@ -258,8 +276,8 @@ const Battery = Widget.Box({
   ],
 })
 
-const Power = Widget.Button({
-  className: "power-button",
+const MenuButton = Widget.Button({
+  className: "menu-button",
   vpack: "center",
   cursor: "pointer",
   label: " ",
@@ -269,8 +287,8 @@ const Power = Widget.Button({
 })
 
 const Left = StatusPart("start", Os, Workspaces, WindowTitle)
-const Center = StatusPart("center", TimeInfo, DateInfo)
-const Right = StatusPart("end", Memory, Network, Volume, Battery, Power)
+const Center = StatusPart("center", TimeInfo, DateInfo, SysTray)
+const Right = StatusPart("end", Memory, Network, Volume, Battery, MenuButton)
 
 export default Widget.Window({
   monitor: 0,

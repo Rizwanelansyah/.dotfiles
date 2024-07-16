@@ -112,7 +112,13 @@ $orange: #F1A781;
     background: $green;
   }
 
-  .power-button {
+  .tray {
+    .item {
+      all: unset;
+    }
+  }
+
+  .menu-button {
     all: unset;
     margin: 0 1px;
     padding: 2px 0.4em;
@@ -263,7 +269,7 @@ $orange: #F1A781;
     color: $green;
 
     .percentage {
-      font-size: 3rem;
+      font-size: 4rem;
     }
   }
 
@@ -304,12 +310,6 @@ $orange: #F1A781;
     }
   }
 
-  .previewer {
-    background: darken($black, 5%);
-    border-radius: 10px;
-    min-height: 150px;
-  }
-
   .wifi {
     @include toggleButton($purple);
   }
@@ -328,12 +328,33 @@ $orange: #F1A781;
     color: $blue;
   }
 
-  .system-info {
+  .notifications {
     background: darken($blue, 10%);
     color: $black;
     border-radius: 10px;
     padding: 5px;
     margin: 10px 0;
+
+    .notif-item {
+      background: $black;
+      padding: 3px;
+      color: $white;
+      border-radius: 10px;
+
+      .title {
+        all: unset;
+        font-size: 1.3rem;
+      }
+
+      .dismiss {
+        all: unset;
+        font-size: 1.5rem;
+        color: $red;
+        background: $black;
+        padding: 4px;
+        margin-right: 10px;
+      }
+    }
   }
 }
 
@@ -394,11 +415,72 @@ $orange: #F1A781;
             background: $blue;
             color: $black;
           }
+
           .icon {
             background: lighten($bg, 5%);
           }
         }
       }
+    }
+  }
+}
+
+window.notification-popups {
+  box.notifications {
+    padding: .5em;
+  }
+
+  .icon {
+    min-width: 68px;
+    min-height: 68px;
+    margin-right: 1em;
+
+    image {
+      font-size: 68px;
+      margin: 5px;
+      color: $white;
+    }
+
+    box {
+      min-width: 68px;
+      min-height: 68px;
+      border-radius: 7px;
+    }
+  }
+
+  .notification {
+    min-width: 350px;
+    border-radius: 11px;
+    padding: 1em;
+    margin: .5em;
+    border: 1px solid $blue;
+    background-color: lighten($black, 5%);
+
+    &.critical {
+      border: 1px solid lightcoral;
+    }
+  }
+
+  .title {
+    color: darken($white, 10%);
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+
+  .body {
+    color: $white;
+  }
+
+  .actions .action-button {
+    margin: 0 .4em;
+    margin-top: .8em;
+
+    &:first-child {
+      margin-left: 0;
+    }
+
+    &:last-child {
+      margin-right: 0;
     }
   }
 }
