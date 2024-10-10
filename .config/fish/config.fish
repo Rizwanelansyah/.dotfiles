@@ -1,132 +1,74 @@
-if status is-interactive
-  export PATH="$PATH:$HOME/.local/bin"
-  export PATH="$PATH:$HOME/.cargo/bin"
-  export PATH="$PATH:$HOME/go/bin"
-  export PATH="$PATH:$HOME/.bin"
-  export PATH="$PATH:$HOME/Tools/zulu-jdk/bin"
-  export PATH="$PATH:$HOME/.config/composer/vendor/bin"
-
-  # bun
-  export BUN_INSTALL="$HOME/.bun"
-  export PATH="$PATH:$BUN_INSTALL/bin"
-
-  export FZF_DEFAULT_OPTS="--border --margin=1"
-  export EDITOR="nvim"
-  export SUDO_PROMPT=(printf "sudo: $(set_color blue)  $USER$(set_color green) Password$(set_color normal)? $(set_color yellow) $(set_color normal)")
-  alias fishr "source ~/.config/fish/config.fish"
-  alias rm "trash"
-  alias ls "exa"
-
-  set fish_color_autosuggestion 464C56
-  source ~/.config/fish/functions/utils.fish
-end
-
-function fish_greeting
-  if test -e ~/scripts/hyprfetch
-    ~/scripts/hyprfetch 1
+function conf
+  set -l files ""
+  for path in ~/.config/*
+    set files "$files:$path"
   end
-end
-
-function fish_mode_prompt
+  set -l file (string split ":" $files | fzf)
+  if test "$file " != " "
+    $EDITOR $file
+  end
 end
 
 function fish_prompt
-  set -l exit_code $status
-  set -l exit_color "green"
-  if test $exit_code != 0
-    set exit_color "red"
-    if test $exit_code = 2
-      set exit_code "INCORRECT:2"
-    else if test $exit_code = 126
-      set exit_code "DENIED:126"
-    else if test $exit_code = 127
-      set exit_code "NOTFOUND:127"
-    else if test $exit_code = 130
-      set exit_code "SIGINT:130"
-    else if test $exit_code = 143
-      set exit_code "SIGTERM:143"
-    end
+  set -l last_status $status
+  printf "\n"
+  printf "┍[$(set_color green)$USER$(set_color normal)@$(set_color blue)$hostname$(set_color normal)] "
+  set -l cur_dir (pwd)
+  if test "" != "$(string match -r "^$HOME" $cur_dir)"
+    set cur_dir (string replace -r "^$HOME" "$(set_color red)Home" $cur_dir)
+    set cur_dir (string replace -r "/" "$(set_color normal)::$(set_color cyan)" $cur_dir)
+  else
+    set cur_dir (string replace -r "^/" "$(set_color red)Root$(set_color normal)::" $cur_dir)
+    set cur_dir (string replace -r '::$' "" $cur_dir)
+    set cur_dir (string replace -r '::' "::$(set_color cyan)" $cur_dir)
   end
 
-  set -l cwd (string replace $HOME " " $PWD)
-  set cwd (string replace -a "/" -- "->" $cwd)
-  printf "┌─(%s$USER%s@%s$hostname%s)─[%s$cwd%s] " \
-    (set_color green) (set_color white) (set_color blue) (set_color normal) \
-    (set_color yellow) (set_color normal)
-  set -l git_prompt (fish_git_prompt)
-  if test "$git_prompt " != " "
-    printf "%s%s$git_prompt%s" (set_color red) (set_color cyan) (set_color normal)
+  set cur_dir (string replace -ra "/" "$(set_color normal)->$(set_color cyan)" $cur_dir)
+  printf "$cur_dir$(set_color normal)"
+
+  set -l git (fish_git_prompt)
+  if test "" != "$git"
+    set git (string replace -r '^\s*\((.*)\)\s*$' '$1' $git)
+    printf " $(set_color purple)🮤$(set_color green)$git$(set_color purple)🮥"
   end
-
-  if test -e Cargo.toml
-    set -l crate (count_cargo_crates)
-    if test "$crate " != " "
-      set -l unit "crate"
-      if test $crate -gt 1
-        set unit "crates"
-      end
-      printf " %s(%s %s$crate%s$unit%s)" \
-      (set_color normal) (set_color white) (set_color blue) (set_color yellow) (set_color normal)
-    end
+  set -l error_code ""
+  if test $last_status -ne 0
+    set error_code "$(set_color normal)<$(set_color red)$last_status$(set_color normal)>"
   end
-
-  if test -e package.json
-    set -l deps (count_npm_dep)
-    set -l dev_deps (count_npm_dev_dep)
-
-    set -l dep_dis ""
-    if test "$deps " != " "
-      if test $deps -gt 0
-        set dep_dis " $(set_color blue)$deps$(set_color cyan)dep"
-        if test $deps -gt 1
-          set dep_dis $dep_dis"s"
-        end
-      end
-    end
-
-    if test "$dev_deps " != " "
-      if test $dev_deps -gt 0
-        set dep_dis $dep_dis" $(set_color blue)$dev_deps$(set_color red)devDep"
-        if test $dev_deps -gt 1
-          set dep_dis $dep_dis"s"
-        end
-      end
-    end
-
-    if test -e package-lock.json
-      set -l packages (count_npm_packages)
-      if test $packages -gt 0
-        set dep_dis $dep_dis" $(set_color blue)$packages$(set_color yellow)pkg"
-        if test $packages -gt 1
-          set dep_dis $dep_dis"s"
-        end
-      end
-    end
-
-    printf " %s(%s $dep_dis%s)" (set_color normal) (set_color red) (set_color normal)
+  set -l end_sign "!"
+  if test "$USER" = "root"
+    set end_sign "#"
   end
-
-  if test -e composer.json
-    set -l deps (count_composer_packages)
-
-    set -l dep_dis ""
-    if test "$deps " != " "
-      if test $deps -gt 0
-        set dep_dis " $(set_color blue)$deps$(set_color purple)pkg"
-        if test $deps -gt 1
-          set dep_dis $dep_dis"s"
-        end
-      end
-    end
-
-    printf " %s(%s󰌟 $dep_dis%s)" (set_color normal) (set_color purple) (set_color normal)
-  end
-
-  printf "\n└─[%s$exit_code%s]%s>%s " (set_color $exit_color) (set_color normal) (set_color green) (set_color normal)
+  printf "$(set_color normal)\n└$(set_color cyan)fish$error_code$(set_color blue)$end_sign$(set_color normal) "
 end
 
-function fish_right_prompt
-end
+export EDITOR="nvim"
 
-function fish_command_not_found
-end
+export PATH="$HOME/.config/composer/vendor/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.luarocks/bin:$PATH"
+
+# java
+export PATH="$HOME/.jenv/bin:$PATH"
+eval "$(jenv init -)"
+jenv enable-plugin export
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+# wine
+export WINE_ROOT="$HOME/.wine"
+export WINE_HOME="$WINE_ROOT/drive_c/users/$USER"
+
+# flutter
+export PATH="$HOME/Tools/flutter/bin:$PATH"
+export FLUTTER_ROOT="$HOME/Tools/flutter"
+
+# Android SDK
+export ANDROID_HOME="$HOME/Tools/Android/SDK"
+
+alias fishr="source $HOME/.config/fish/config.fish"
+alias ls="exa --icons=always"
+
+set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME ; set -gx PATH $HOME/.cabal/bin /home/rizwan/.ghcup/bin $PATH # ghcup-env

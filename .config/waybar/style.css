@@ -1,0 +1,142 @@
+@define-color bg #1f2329;
+@define-color bg1 #282c34;
+@define-color bg2 #30363f;
+@define-color bg3 #323641;
+@define-color bg_blue #61afef;
+@define-color bg_d #181b20;
+@define-color bg_yellow #e8c88c;
+@define-color black #0e1013;
+@define-color blue #4fa6ed;
+@define-color cyan #48b0bd;
+@define-color dark_cyan #266269;
+@define-color dark_purple #7e3992;
+@define-color dark_red #8b3434;
+@define-color dark_yellow #835d1a;
+@define-color fg #a0a8b7;
+@define-color green #8ebd6b;
+@define-color grey #535965;
+@define-color light_grey #7a818e;
+@define-color orange #cc9057;
+@define-color purple #bf68d9;
+@define-color red #e55561;
+@define-color yellow #e2b86b;
+
+* {
+  font-family: "JetBrainsMono Nerd Font", monospace;
+  font-size: 11px;
+}
+
+window#waybar {
+  background: @bg;
+  color: @fg;
+  border-radius: 5px;
+  border: none;
+  padding: 2px;
+}
+
+#workspaces {
+  margin-left: .5rem;
+  padding: 5px 0;
+}
+
+#workspaces > button {
+  font-weight: bold;
+  border-radius: 3px;
+  padding: 0 .4em;
+}
+
+#workspaces > button.active {
+  color: @bg1;
+  background: @blue;
+}
+
+#window {
+  background: @bg1;
+  padding: 0 1em;
+  border-radius: 1em;
+  margin: 5px;
+}
+
+#clock,
+#backlight.value,
+#network.value,
+#memory.value,
+#cpu.value,
+#battery.value {
+  font-size: 1rem;
+  margin: 6px .5em 6px 0;
+  padding: 0 1em 0 .5em;
+  border-radius: 0 1em 1em 0;
+  background: @bg1;
+}
+
+#custom-clock-icon,
+#backlight.icon,
+#network.icon,
+#memory.icon,
+#cpu.icon,
+#battery.icon {
+  font-size: 1rem;
+  margin: 6px 0 6px .5em;
+  padding: 0 .5em 0 .5em;
+  border-radius: 1em 0 0 1em;
+  background: @fg;
+  color: @bg1;
+}
+#custom-clock-icon {
+  background: @green;
+}
+#backlight.icon {
+  background: @yellow;
+}
+#network.icon {
+  background: @purple;
+}
+#memory.icon {
+  background: @red;
+}
+#cpu.icon {
+  background: @cyan;
+}
+
+#battery.icon {
+  background: @blue;
+}
+#battery.icon.warning {
+  background: @yellow;
+}
+#battery.icon.critical {
+  background: @red;
+}
+#battery.icon.charging {
+  background: @green;
+}
+
+#clock {
+  color: @green;
+}
+#backlight.value {
+  color: @yellow;
+}
+#network.value {
+  color: @purple;
+}
+#cpu.value {
+  color: @cyan;
+}
+#memory.value {
+  color: @red;
+}
+
+#battery.value {
+  color: @blue;
+}
+#battery.value.warning {
+  color: @yellow;
+}
+#battery.value.critical {
+  color: @red;
+}
+#battery.value.charging {
+  color: @green;
+}

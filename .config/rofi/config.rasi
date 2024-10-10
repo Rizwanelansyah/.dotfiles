@@ -1,6 +1,6 @@
 configuration {
   modes: "drun,run,window,filebrowser";
-  font: "CodeNewRoman Nerd Font 12";
+  font: "HexaCode 12";
   fixed-num-lines: true;
   show-icons: true;
   icon-theme: "Fluent-dark";
@@ -25,28 +25,32 @@ configuration {
 *******************************************************************************/
 
 * {
-  black:      #000000;
-  white:      #ffffff;
-  red:        #eb6e67;
-  green:      #95ee8f;
-  yellow:     #f8c456;
-  blue:       #6eaafb;
-  mangenta:   #d886f3;
-  cyan:       #6cdcf7;
-  emphasis:   #50536b;
-  text:       #dfdfdf;
-  text-alt:   #b2b2b2;
-  fg:         #abb2bf;
-  bg:         #282c34;
-  bg-alt:     #252331;
-  spacing: 0;
-  text-color: @text;
+  bg: #1f2329;
+  bg1: #282c34;
+  bg2: #30363f;
+  bg3: #323641;
+  bg-blue: #61afef;
+  bg-d: #181b20;
+  bg-yellow: #e8c88c;
+  black: #0e1013;
+  blue: #4fa6ed;
+  cyan: #48b0bd;
+  dark-cyan: #266269;
+  dark-purple: #7e3992;
+  dark-red: #8b3434;
+  dark-yellow: #835d1a;
+  fg: #a0a8b7;
+  green: #8ebd6b;
+  grey: #535965;
+  light-grey: #7a818e;
+  orange: #cc9057;
+  purple: #bf68d9;
+  red: #e55561;
+  yellow: #e2b86b;
 }
 
 window {
-  background-color: @bg;
-  border: 0;
-  border-radius: 10px;
+  background-color: @bg1;
   padding: 0;
 }
 mainbox {
@@ -55,22 +59,19 @@ mainbox {
 }
 
 message {
-  border: 2px;
-  border-color: @blue;
-  border-radius: 10px;
-  padding: 10px;
-  background-color: @blue;
+  padding: 1em;
+  background-color: @bg2;
   margin: 10px;
 }
 textbox {
-  text-color: @white;
+  text-color: @fg;
 }
 
 listview {
   border: 0;
   spacing: 0;
   scrollbar: true;
-  padding: 10px 0;
+  padding: 10px 1em;
   lines: 7;
   fixed-height: true;
   fixed-columns: true;
@@ -78,7 +79,6 @@ listview {
 element {
   margin: 5px;
   padding: 8px;
-  border-radius: 10px;
 }
 element-icon {
   size: 30;
@@ -89,82 +89,91 @@ element-text {
   text-color: inherit;
 }
 element.normal.normal {
-  background-color: @bg;
-  text-color: @text;
+  background-color: @bg1;
+  text-color: @fg;
 }
 element.normal.urgent {
-  background-color: @bg;
+  background-color: @bg1;
   text-color: @red;
 }
 element.normal.active {
-  background-color: @bg;
+  background-color: @bg1;
   text-color: @green;
-}
-element.selected.normal {
-  background-color: @blue;
-  text-color: @white;
-}
-element.selected.urgent {
-  background-color: @red;
-  text-color: @white;
-}
-element.selected.active {
-  background-color: @green;
-  text-color: @white;
 }
 element.alternate.normal {
   background-color: @bg;
-  text-color: @text-alt;
+  text-color: @fg;
 }
+element.alternate.urgent {
+  background-color: @bg1;
+  text-color: @red;
+}
+element.alternate.active {
+  background-color: @bg1;
+  text-color: @green;
+}
+element.alternate.normal {
+  background-color: @bg1;
+  text-color: @fg;
+}
+element.selected.normal {
+  background-color: @bg;
+  text-color: @fg;
+}
+element.selected.urgent {
+  background-color: @bg;
+  text-color: @red;
+}
+element.selected.active {
+  background-color: @bg;
+  text-color: @green;
+}
+
 scrollbar {
-  width: 2px;
-  handle-width: 2px;
-  handle-color: @text-alt;
+  width: 0.2em;
+  handle-width: 0.2em;
+  handle-color: @fg;
 }
 
 mode-switcher {
-  border: none;
   padding: 0;
-  background-color: @bg-alt;
-  text-color: @text-alt;
+  background-color: @bg2;
+  text-color: @fg;
 }
 button {
-  border-radius: 0;
-  border: 2px 0 0 0;
-  padding: 5px 3px;
-  text-color: @text-alt;
-  border-color: @text-alt;
+  padding: 10px 3px;
+  text-color: @fg;
 }
 button.selected {
-  background-color: @bg;
-  text-color: @cyan;
-  border-radius: 0 0 10px 10px;
-  border: 0 2px 2px 2px solid;
+  text-color: @blue;
+  background-color: @bg1;
 }
 
 inputbar {
   spacing: 0;
   text-color: @fg;
   padding: 5px;
-  vertical-align: 0.5;
+  background-color: @bg;
+  padding: 1em;
   children: [ prompt, entry, case-indicator ];
 }
 case-indicator {
   spacing: 0;
-  text-color: @text-alt;
+  text-color: @fg;
 }
 entry {
+  margin: 0 0 0 1em;
   spacing: 0;
-  text-color: @text-alt;
+  text-color: @fg;
   vertical-align: 0.5;
-  cursor-width: 10px;
-  cursor-color: @yellow;
+  cursor-width: 1px;
+  cursor-color: @green;
 }
 prompt {
   spacing: 0;
+  horizontal-align: 0.5;
   text-color: @black;
   background-color: @green;
-  padding: 5px;
-  margin: 5px 10px 5px 5px;
-  border-radius: 10px;
+  border-radius: 0.5em;
+  padding: 0 1em;
 }

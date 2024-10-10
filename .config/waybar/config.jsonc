@@ -1,0 +1,145 @@
+{
+  "margin": "2",
+  "modules-left": [
+    "hyprland/workspaces",
+    "hyprland/window"
+  ],
+  "modules-center": [
+    "custom/clock-icon",
+    "clock",
+    "tray"
+  ],
+  "modules-right": [
+    "backlight#icon",
+    "backlight#value",
+    "network#icon",
+    "network#value",
+    "cpu#icon",
+    "cpu#value",
+    "memory#icon",
+    "memory#value",
+    "battery#icon",
+    "battery#value"
+  ],
+  "hyprland/workspaces": {
+    "format": "{icon}"
+  },
+  "hyprland/window": {
+    "format": "{title}",
+    "max-length": 40,
+    "icon": true,
+    "icon-size": 20
+  },
+  "custom/clock-icon": {
+    "format": " "
+  },
+  "clock": {
+    "format": "{:%H:%M:%S}",
+    "format-alt": "  {:%A, %B %d, %Y (  %H:%M)}",
+    "tooltip-format": "<tt><small>{calendar}</small></tt>",
+    "calendar": {
+      "mode": "year",
+      "mode-mon-col": 3,
+      "weeks-pos": "right",
+      "on-scroll": 1,
+      "format": {
+        "months": "<span color='#ffead3'><b>{}</b></span>",
+        "days": "<span color='#ecc6d9'><b>{}</b></span>",
+        "weeks": "<span color='#99ffdd'><b>W{}</b></span>",
+        "weekdays": "<span color='#ffcc66'><b>{}</b></span>",
+        "today": "<span color='#ff6699'><b><u>{}</u></b></span>"
+      }
+    },
+    "actions": {
+      "on-click-right": "mode",
+      "on-click-forward": "tz_up",
+      "on-click-backward": "tz_down",
+      "on-scroll-up": "shift_up",
+      "on-scroll-down": "shift_down"
+    }
+  },
+  "tray": {
+    "icon-size": 16,
+    "spacing": 5
+  },
+  "backlight#icon": {
+    "format": "{icon}",
+    "format-icons": [
+      "󰃞 ",
+      "󰃝 ",
+      "󰃟 ",
+      "󰃠 "
+    ]
+  },
+  "backlight#value": {
+    "format": "{percent}%"
+  },
+  "network#icon": {
+    "interval": 10,
+    "format": "()",
+    "format-wifi": "󰖩 ",
+    "format-ethernet": " ",
+    "format-disconnected": " ",
+    "tooltip-format": " ",
+    "tooltip-format-wifi": "󰖩 ",
+    "tooltip-format-ethernet": " ",
+    "tooltip-format-disconnected": " ",
+    "max-length": 2
+  },
+  "network#value": {
+    "interval": 10,
+    "format": "{ifname}",
+    "format-wifi": "{essid} ({signalStrength}%)",
+    "format-ethernet": "{ipaddr}/{cidr}",
+    "format-disconnected": "Disconnected",
+    "tooltip-format": "{ifname} via {gwaddr}",
+    "tooltip-format-wifi": "{essid} ({signalStrength}%)",
+    "tooltip-format-ethernet": "{ifname}",
+    "tooltip-format-disconnected": "Disconnected",
+    "max-length": 30
+  },
+  "memory#icon": {
+    "interval": 10,
+    "format": " "
+  },
+  "memory#value": {
+    "interval": 10,
+    "format": "{used:0.1f}/{total:0.1f}G"
+  },
+  "cpu#icon": {
+    "interval": 10,
+    "format": " "
+  },
+  "cpu#value": {
+    "interval": 10,
+    "format": "{usage}%"
+  },
+  "battery#icon": {
+    "interval": 1,
+    "states": {
+      "warning": 30,
+      "critical": 15
+    },
+    "format": "{icon}",
+    "format-charging": " ",
+    "format-icons": [
+      " ",
+      " ",
+      " ",
+      " ",
+      " "
+    ],
+    "max-length": 2
+  },
+  "battery": {
+    "interval": 1,
+    "states": {
+      "warning": 30,
+      "critical": 15
+    },
+    "format": "{capacity}%",
+    "format-charging": "{capacity}%",
+    "max-length": 5
+  },
+  "reload_style_on_change": true
+}
