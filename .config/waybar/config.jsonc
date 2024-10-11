@@ -5,6 +5,7 @@
     "hyprland/window"
   ],
   "modules-center": [
+    "custom/notification",
     "custom/clock-icon",
     "clock",
     "tray"
@@ -21,6 +22,26 @@
     "battery#icon",
     "battery#value"
   ],
+  "custom/notification": {
+    "tooltip": false,
+    "format": "{icon}",
+    "format-icons": {
+      "notification": "<span foreground='red'><sup></sup></span>",
+      "none": " ",
+      "dnd-notification": "<span foreground='red'><sup></sup></span>",
+      "dnd-none": " ",
+      "inhibited-notification": "<span foreground='red'><sup></sup></span>",
+      "inhibited-none": " ",
+      "dnd-inhibited-notification": "<span foreground='red'><sup></sup></span>",
+      "dnd-inhibited-none": " "
+    },
+    "return-type": "json",
+    "exec-if": "which swaync-client",
+    "exec": "swaync-client -swb",
+    "on-click": "swaync-client -t -sw",
+    "on-click-right": "swaync-client -d -sw",
+    "escape": true
+  },
   "hyprland/workspaces": {
     "format": "{icon}"
   },
@@ -28,7 +49,7 @@
     "format": "{title}",
     "max-length": 40,
     "icon": true,
-    "icon-size": 20
+    "icon-size": 18
   },
   "custom/clock-icon": {
     "format": " "

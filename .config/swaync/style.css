@@ -1,0 +1,125 @@
+@define-color bg #1f2329;
+@define-color bg1 #282c34;
+@define-color bg2 #30363f;
+@define-color bg3 #323641;
+@define-color bg_blue #61afef;
+@define-color bg_d #181b20;
+@define-color bg_yellow #e8c88c;
+@define-color black #0e1013;
+@define-color blue #4fa6ed;
+@define-color cyan #48b0bd;
+@define-color dark_cyan #266269;
+@define-color dark_purple #7e3992;
+@define-color dark_red #8b3434;
+@define-color dark_yellow #835d1a;
+@define-color fg #a0a8b7;
+@define-color green #8ebd6b;
+@define-color grey #535965;
+@define-color light_grey #7a818e;
+@define-color orange #cc9057;
+@define-color purple #bf68d9;
+@define-color red #e55561;
+@define-color yellow #e2b86b;
+
+* {
+  font-family: "JetBrainsMono Nerd Font", monospace;
+  transition: none;
+  font-size: 15px;
+}
+
+.control-center {
+  opacity: 1;
+  background: @bg;
+  border: 1px solid @cyan;
+  border-radius: 0;
+}
+
+.notification-row {
+  all: unset;
+}
+
+.notification {
+  outline: none;
+  margin: 0px;
+  padding: 5px 1em;
+  background: @bg1;
+  box-shadow: none;
+  border: none;
+  border-radius: 0;
+}
+
+.notification-content {
+  all: unset;
+  background: @bg1;
+}
+
+.notification-action,
+.notification-default-action {
+  all: unset;
+  border-radius: 0;
+  font-size: 10px;
+}
+
+.notification-action:hover,
+.notification-default-action:hover {
+  background: @green;
+  color: @black;
+}
+
+.close-button {
+  background: transparent;
+  color: @fg;
+  border-radius: 0;
+  padding: 4px;
+  margin-top: -5px;
+  margin-right: -5px;
+}
+
+.close-button:hover {
+  color: @red;
+  background: transparent;
+}
+
+.summary {
+  font-size: 12px;
+  font-weight: 600;
+  color: @fg;
+}
+
+.time {
+  font-size: 8px;
+  font-weight: 400;
+  color: @light_grey;
+}
+
+button {
+  all: unset;
+  background: @bg1;
+  padding: 4px 1em;
+  color: @fg;
+}
+
+button:hover {
+  background: @blue;
+  color: @black;
+}
+
+switch {
+  all: unset;
+  background: @bg2;
+  padding: 5px;
+}
+
+switch:checked {
+  background: @blue;
+}
+
+switch slider {
+  border-radius: 0;
+  border: none;
+  margin: 0;
+  background: @bg;
+}
+switch:checked slider {
+  background: @bg2;
+}

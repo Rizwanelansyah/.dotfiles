@@ -2,6 +2,9 @@ vim.filetype.add({
   extension = {
     ["blade.php"] = "blade",
   },
+  pattern = {
+    ["hyprland.conf"] = "hyprlang",
+  },
 })
 
 local map = vim.keymap.set

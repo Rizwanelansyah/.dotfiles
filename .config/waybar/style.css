@@ -23,7 +23,9 @@
 
 * {
   font-family: "JetBrainsMono Nerd Font", monospace;
-  font-size: 11px;
+  font-size: 10px;
+  margin: 0;
+  padding: 0;
 }
 
 window#waybar {
@@ -31,21 +33,23 @@ window#waybar {
   color: @fg;
   border-radius: 5px;
   border: none;
-  padding: 2px;
+  padding: 0 2px;
 }
 
 #workspaces {
-  margin-left: .5rem;
-  padding: 5px 0;
+  margin-left: .5em;
+  padding: .2em;
 }
 
 #workspaces > button {
   font-weight: bold;
   border-radius: 3px;
   padding: 0 .4em;
+  margin: 0;
 }
 
 #workspaces > button.active {
+  font-size: 1em;
   color: @bg1;
   background: @blue;
 }
@@ -54,7 +58,7 @@ window#waybar {
   background: @bg1;
   padding: 0 1em;
   border-radius: 1em;
-  margin: 5px;
+  margin:  5px;
 }
 
 #clock,
@@ -63,8 +67,8 @@ window#waybar {
 #memory.value,
 #cpu.value,
 #battery.value {
-  font-size: 1rem;
-  margin: 6px .5em 6px 0;
+  font-size: 1em;
+  margin: 5px .5em 5px 0;
   padding: 0 1em 0 .5em;
   border-radius: 0 1em 1em 0;
   background: @bg1;
@@ -76,8 +80,8 @@ window#waybar {
 #memory.icon,
 #cpu.icon,
 #battery.icon {
-  font-size: 1rem;
-  margin: 6px 0 6px .5em;
+  font-size: 1em;
+  margin: 5px 0 5px .5em;
   padding: 0 .5em 0 .5em;
   border-radius: 1em 0 0 1em;
   background: @fg;
@@ -139,4 +143,13 @@ window#waybar {
 }
 #battery.value.charging {
   color: @green;
+}
+
+#custom-notification {
+  border-radius: 1em;
+  font-size: 1em;
+  margin: 5px 0 5px .5em;
+  padding: 0 .5em 0 .5em;
+  background: @yellow;
+  color: @bg1;
 }
