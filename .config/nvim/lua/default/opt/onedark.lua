@@ -72,7 +72,9 @@ return {
     AlphaHeaderSecPri = { fg = alphsec, bg = alphrim },
     SniprunVirtualTextOk = { fg = "$grey", bg = "none" },
     SniprunVirtualTextErr = { fg = "$red", bg = "none" },
-  },
+    FoldColumn = { fg = "$blue", bg = "none" },
+    CursorLine = { bg = "none" }
+},
 
   -- Plugins Config --
   diagnostics = {

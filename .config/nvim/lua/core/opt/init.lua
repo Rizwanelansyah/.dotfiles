@@ -1,9 +1,32 @@
+local fold_hls = {
+  "RainbowDelimiterRed",
+  "RainbowDelimiterBlue",
+  "RainbowDelimiterGreen",
+  "RainbowDelimiterOrange",
+  "RainbowDelimiterViolet",
+  "RainbowDelimiterCyan",
+  "RainbowDelimiterYellow",
+}
+
 function _G.core_options_status_column_func()
-  local foldable = require("nvim-treesitter.fold").get_fold_indic(vim.v.lnum):match("[^%d]+") ~= nil
-  local foldstart = vim.fn.foldclosed(vim.v.lnum)
-  local folded = foldstart >= 0
   if vim.wo.number then
-    return (foldable and (folded and " " or " ") or "  ") .. "%s%=%l "
+    local foldable = require("nvim-treesitter.fold").get_fold_indic(vim.v.lnum):match("[^%d]+") ~= nil
+    local nextfoldable = (require("nvim-treesitter.fold").get_fold_indic(vim.v.lnum + 1) or ""):match("[^%d]+") ~= nil
+    local foldstart = vim.fn.foldclosed(vim.v.lnum)
+    local foldlevel = vim.fn.foldlevel(vim.v.lnum)
+    local nextfoldlevel = vim.fn.foldlevel(vim.v.lnum + 1)
+    local folded = foldstart > 0
+    local foldindicator = "  "
+    local foldhl = fold_hls[((foldlevel - 1) % #fold_hls) + 1]
+    if foldlevel > 0 then
+      if (nextfoldable and nextfoldable == foldlevel) or nextfoldlevel < foldlevel then
+        foldindicator = "%(%#" .. foldhl .. "#└ %)"
+      else
+        foldindicator = "%(%#" .. foldhl .. "#│ %)"
+      end
+    end
+    local foldsign = foldable and (folded and "%(%#" .. foldhl .. "# %)" or "%(%#" .. foldhl .. "# %)")
+    return (foldsign or foldindicator) .. "%s%=" .. (folded and "%#FoldColumn#" or "") .. "%l "
   else
     return ""
   end
@@ -55,7 +78,7 @@ function _G.core_options_foldtext_func()
   local end_ = vim.trim(end_str)
   local result = {}
   fold_virt_text(result, start, vim.v.foldstart - 1)
-  table.insert(result, { " ... ", "Delimiter" })
+  table.insert(result, { " ... ", "String" })
   fold_virt_text(result, end_, vim.v.foldend - 1, #(end_str:match("^(%s+)") or ""))
 
   return result
@@ -75,3 +98,5 @@ vim.opt.showtabline = 2
 vim.opt.fillchars = "fold: ,foldopen:,foldclose:,foldsep:1"
 vim.opt.foldtext = "v:lua.core_options_foldtext_func()"
 vim.opt.statuscolumn = "%{%v:lua.core_options_status_column_func()%}"
+vim.opt.cursorline = true
+vim.opt.signcolumn = "yes"
