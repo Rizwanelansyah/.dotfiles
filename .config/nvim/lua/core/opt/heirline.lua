@@ -518,13 +518,12 @@ local TablineCloseButton = {
   },
 }
 
-local TablineBufferBlock = utils.surround({ "", "" }, function(self)
-  if self.is_active then
-    return "bg0"
-  else
-    return "black"
-  end
-end, { TablineFileNameBlock, TablineCloseButton })
+local TablineBufferBlock = {
+  hl = function(self)
+    return { bg = self.is_active and "bg0" or "black" }
+  end,
+  { TablineFileNameBlock, TablineCloseButton }
+}
 
 local BufferLine = utils.make_buflist(
   TablineBufferBlock,
