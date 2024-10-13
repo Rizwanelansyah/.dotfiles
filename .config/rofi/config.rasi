@@ -1,5 +1,5 @@
 configuration {
-  modes: "drun,run,window,filebrowser";
+  modes: "drun,run,window,emoji";
   font: "HexaCode 12";
   fixed-num-lines: true;
   show-icons: true;
@@ -52,6 +52,8 @@ configuration {
 window {
   background-color: @bg1;
   padding: 0;
+  border-radius: 20px;
+  border: 0;
 }
 mainbox {
   border: 0;
@@ -71,7 +73,7 @@ listview {
   border: 0;
   spacing: 0;
   scrollbar: true;
-  padding: 10px 1em;
+  padding: 0 0;
   lines: 7;
   fixed-height: true;
   fixed-columns: true;
@@ -130,9 +132,10 @@ element.selected.active {
 }
 
 scrollbar {
-  width: 0.2em;
-  handle-width: 0.2em;
-  handle-color: @fg;
+  width: 0.5em;
+  handle-width: 0.5em;
+  handle-color: @bg2;
+  background-color: @bg;
 }
 
 mode-switcher {
@@ -152,7 +155,6 @@ button.selected {
 inputbar {
   spacing: 0;
   text-color: @fg;
-  padding: 5px;
   background-color: @bg;
   padding: 1em;
   children: [ prompt, entry, case-indicator ];

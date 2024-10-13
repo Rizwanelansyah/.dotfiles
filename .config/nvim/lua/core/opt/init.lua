@@ -19,7 +19,7 @@ function _G.core_options_status_column_func()
     local foldindicator = "  "
     local foldhl = fold_hls[((foldlevel - 1) % #fold_hls) + 1]
     if foldlevel > 0 then
-      if (nextfoldable and nextfoldable == foldlevel) or nextfoldlevel < foldlevel then
+      if (nextfoldable and nextfoldlevel == foldlevel) or nextfoldlevel < foldlevel then
         foldindicator = "%(%#" .. foldhl .. "#└ %)"
       else
         foldindicator = "%(%#" .. foldhl .. "#│ %)"
@@ -56,6 +56,18 @@ local function fold_virt_text(result, s, lnum, coloff)
       local _hl = hls[#hls]
       if _hl then
         local new_hl = "@" .. _hl.capture
+        if new_hl:match("^@markup") then
+          new_hl = new_hl .. ".markdown"
+        end
+        local j = #hls
+        while j > 1 and vim.tbl_isempty(vim.api.nvim_get_hl(0, { name = new_hl, create = false })) do
+          j = j - 1
+          _hl = hls[j]
+          new_hl = "@" .. _hl.capture
+          if new_hl:match("^@markup") then
+            new_hl = new_hl .. ".markdown"
+          end
+        end
         if new_hl ~= hl then
           table.insert(result, { text, hl })
           text = ""
@@ -78,8 +90,12 @@ function _G.core_options_foldtext_func()
   local end_ = vim.trim(end_str)
   local result = {}
   fold_virt_text(result, start, vim.v.foldstart - 1)
-  table.insert(result, { " ... ", "String" })
-  fold_virt_text(result, end_, vim.v.foldend - 1, #(end_str:match("^(%s+)") or ""))
+  if vim.bo.ft == "markdown" then
+    table.insert(result, { " ~~", "String" })
+  else
+    table.insert(result, { " ... ", "String" })
+    fold_virt_text(result, end_, vim.v.foldend - 1, #(end_str:match("^(%s+)") or ""))
+  end
 
   return result
 end

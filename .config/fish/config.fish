@@ -42,6 +42,9 @@ function fish_prompt
   printf "$(set_color normal)\n└$(set_color cyan)fish$error_code$(set_color blue)$end_sign$(set_color normal) "
 end
 
+function fish_greeting
+end
+
 export EDITOR="nvim"
 
 export PATH="$HOME/.config/composer/vendor/bin:$PATH"
@@ -51,7 +54,7 @@ export PATH="$HOME/.luarocks/bin:$PATH"
 # java
 export PATH="$HOME/.jenv/bin:$PATH"
 eval "$(jenv init -)"
-jenv enable-plugin export
+#jenv enable-plugin export
 
 # bun
 export BUN_INSTALL="$HOME/.bun"

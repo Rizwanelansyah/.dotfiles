@@ -47,11 +47,9 @@ archlinux dotfiles
 - font: HexCode
 - shell: fish
 
-
 ## Editor: Neovim
 - theme: Onedark
 - plugin manager: lazy.nvim
-
 
 ## Multiplexer: Tmux
 - prefix: `CTRL + x`

@@ -24,14 +24,15 @@
 * {
   font-family: "JetBrainsMono Nerd Font", monospace;
   transition: none;
-  font-size: 15px;
+  font-size: 12px;
+  transition: 300ms;
 }
 
 .control-center {
   opacity: 1;
   background: @bg;
-  border: 1px solid @cyan;
-  border-radius: 0;
+  border: 2px solid @bg2;
+  border-radius: 20;
 }
 
 .notification-row {
@@ -45,7 +46,7 @@
   background: @bg1;
   box-shadow: none;
   border: none;
-  border-radius: 0;
+  border-radius: 10px;
 }
 
 .notification-content {
@@ -56,7 +57,7 @@
 .notification-action,
 .notification-default-action {
   all: unset;
-  border-radius: 0;
+  border-radius: 5px;
   font-size: 10px;
 }
 
@@ -96,6 +97,7 @@ button {
   all: unset;
   background: @bg1;
   padding: 4px 1em;
+  border-radius: 10px;
   color: @fg;
 }
 
@@ -108,6 +110,7 @@ switch {
   all: unset;
   background: @bg2;
   padding: 5px;
+  border-radius: 10px;
 }
 
 switch:checked {
@@ -118,6 +121,7 @@ switch slider {
   border-radius: 0;
   border: none;
   margin: 0;
+  border-radius: 5px;
   background: @bg;
 }
 switch:checked slider {
