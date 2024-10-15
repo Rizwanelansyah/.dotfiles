@@ -7,7 +7,6 @@ archlinux dotfiles
 ![Overview 3](https://github.com/Rizwanelansyah/.dotfiles/blob/main/overview/3.png?raw=true)
 ![Overview 4](https://github.com/Rizwanelansyah/.dotfiles/blob/main/overview/4.png?raw=true)
 ![Overview 5](https://github.com/Rizwanelansyah/.dotfiles/blob/main/overview/5.png?raw=true)
-![Overview 6](https://github.com/Rizwanelansyah/.dotfiles/blob/main/overview/6.png?raw=true)
 
 # Info
 ## WM: Hyprland
