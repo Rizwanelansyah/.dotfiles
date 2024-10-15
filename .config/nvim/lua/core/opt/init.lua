@@ -93,7 +93,7 @@ function _G.core_options_foldtext_func()
   if vim.bo.ft == "markdown" then
     table.insert(result, { " ~~", "String" })
   else
-    table.insert(result, { " ... ", "String" })
+    table.insert(result, { "   ", "Comment" })
     fold_virt_text(result, end_, vim.v.foldend - 1, #(end_str:match("^(%s+)") or ""))
   end
 

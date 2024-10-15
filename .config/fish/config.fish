@@ -54,7 +54,6 @@ export PATH="$HOME/.luarocks/bin:$PATH"
 # java
 export PATH="$HOME/.jenv/bin:$PATH"
 eval "$(jenv init -)"
-#jenv enable-plugin export
 
 # bun
 export BUN_INSTALL="$HOME/.bun"

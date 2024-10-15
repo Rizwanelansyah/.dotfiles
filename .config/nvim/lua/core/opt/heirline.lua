@@ -30,7 +30,6 @@ local ViMode = {
       ["!"] = "Shell",
       t = "Terminal",
     },
-
     mode_colors = {
       n = "green",
       i = "blue",
@@ -46,7 +45,6 @@ local ViMode = {
       ["!"] = "green",
       t = "green",
     },
-
     mode_icons = {
       n = " ",
       i = " ",
@@ -235,19 +233,6 @@ local LspClients = {
   provider = function(self)
     return self.child:eval()
   end,
-}
-
-local LspProgress = {
-  provider = function()
-    return require("lsp-progress").progress()
-  end,
-  update = {
-    "User",
-    pattern = "LspProgressStatusUpdated",
-    callback = vim.schedule_wrap(function()
-      vim.cmd("redrawstatus")
-    end),
-  },
 }
 
 local Git = {
@@ -605,8 +590,6 @@ config.statusline = {
   File,
   { provider = " " },
   Git,
-  { provider = "%=" },
-  LspProgress,
   { provider = "%=" },
   Diagnostics,
   { provider = " " },
