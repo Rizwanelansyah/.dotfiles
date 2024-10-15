@@ -52,12 +52,17 @@ archlinux dotfiles
 
 ## Terminal: Kitty
 - theme: Onedark
-- font: HexCode
+- font: JetBrainsMono
 - shell: fish
 
 ## Editor: Neovim
 - theme: Onedark
 - plugin manager: lazy.nvim
+
+## AppLauncher: Rofi (Wayland)
+- theme: onedark
+- modes: drun, run, window, emoji
+- font: HexaCode
 
 ## Multiplexer: Tmux
 - prefix: `CTRL + x`
