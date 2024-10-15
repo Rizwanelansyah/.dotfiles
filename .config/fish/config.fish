@@ -46,6 +46,7 @@ function fish_greeting
 end
 
 export EDITOR="nvim"
+export SHELL=(which fish)
 
 export PATH="$HOME/.config/composer/vendor/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"

@@ -1,11 +1,20 @@
 # Archlinux Dotfiles
 archlinux dotfiles
 
+# Overview
+![Overview 1](https://github.com/Rizwanelansyah/.dotfiles/blob/main/overview/1.png?raw=true)
+![Overview 2](https://github.com/Rizwanelansyah/.dotfiles/blob/main/overview/2.png?raw=true)
+![Overview 3](https://github.com/Rizwanelansyah/.dotfiles/blob/main/overview/3.png?raw=true)
+![Overview 4](https://github.com/Rizwanelansyah/.dotfiles/blob/main/overview/4.png?raw=true)
+![Overview 5](https://github.com/Rizwanelansyah/.dotfiles/blob/main/overview/5.png?raw=true)
+![Overview 6](https://github.com/Rizwanelansyah/.dotfiles/blob/main/overview/6.png?raw=true)
+
 # Info
 ## WM: Hyprland
 - mainMod: `SUPER`
 - bindings
-    - `mainMod + Q` = Open terminal
+    - `mainMod + Q` = Open terminal (with TMUX)
+    - `ALT + Q` = Open terminal (without starting TMUX)
     - `mainMod + C` = Kill active window
     - `mainMod + M` = Logout Hyprland
     - `mainMod + V` = Toggle floating
