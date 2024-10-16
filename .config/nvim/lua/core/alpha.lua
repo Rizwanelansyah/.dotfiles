@@ -64,7 +64,7 @@ local function colored_text(lines, pallete)
 end
 
 local separator = " "
-local separator_right = " "
+local separator_right = " "
 ---@param icon string
 ---@param desc string
 ---@param action? function | string
@@ -98,7 +98,7 @@ local function button(icon, desc, action, opts)
       keymap = opts.keymap or mapping,
       position = opts.position or "center",
       hl = hl[1],
-      cursor = cursor_pos - 1,
+      cursor = cursor_pos,
     },
   }
 end

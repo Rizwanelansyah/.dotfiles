@@ -49,3 +49,7 @@ vim.keymap.set("n", "<C-n>", function()
   ---@diagnostic disable-next-line: missing-parameter
   require("hover").hover_switch("next")
 end, { desc = "hover.nvim (next source)" })
+
+vim.keymap.set('n', '<leader>Fc', "<cmd>Fidget clear<cr>", { desc = "Fidget :: Clear" })
+vim.keymap.set('n', '<leader>FC', "<cmd>Fidget clear_history<cr>", { desc = "Fidget :: Clear History" })
+vim.keymap.set('n', '<leader>Fh', "<cmd>Fidget history<cr>", { desc = "Fidget :: Show History" })

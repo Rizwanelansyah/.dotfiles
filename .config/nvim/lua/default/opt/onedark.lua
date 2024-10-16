@@ -73,7 +73,8 @@ return {
     SniprunVirtualTextOk = { fg = "$grey", bg = "none" },
     SniprunVirtualTextErr = { fg = "$red", bg = "none" },
     FoldColumn = { fg = "$blue", bg = "none" },
-    CursorLine = { bg = "none" }
+    CursorLine = { bg = "none" },
+    NvimTreeCursorLine = { bg = "$bg2" },
 },
 
   -- Plugins Config --

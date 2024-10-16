@@ -1,4 +1,4 @@
-vim.g.nvx_profile = vim.g.nvxprofile or "default"
+vim.g.nvx_profile = vim.g.nvx_profile or "default"
 V = {}
 local options_loaded = {}
 

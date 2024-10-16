@@ -25,7 +25,7 @@ return {
   diag_error = get_highlight("DiagnosticError").fg,
   diag_hint = get_highlight("DiagnosticHint").fg,
   diag_info = get_highlight("DiagnosticInfo").fg,
-  git_del = get_highlight("diffDeleted").fg,
-  git_add = get_highlight("diffAdded").fg,
-  git_change = get_highlight("diffChanged").fg,
+  git_del = get_highlight("DiffDeleted").fg,
+  git_add = get_highlight("DiffAdded").fg,
+  git_change = get_highlight("DiffChanged").fg,
 }

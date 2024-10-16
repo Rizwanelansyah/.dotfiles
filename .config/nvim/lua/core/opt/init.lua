@@ -43,7 +43,18 @@ local function fold_virt_text(result, s, lnum, coloff)
     local tokens = vim.lsp.semantic_tokens.get_at_pos(0, lnum, coloff + i - 1)
     local tok = tokens and tokens[#tokens]
     if tok then
-      local new_hl = "@lsp.type." .. tok.type
+      local new_hl = "@lsp.typemod." .. tok.type
+      local breaked = false
+      for key, value in pairs(tok.modifiers) do
+        if value then
+          new_hl = new_hl .. "." .. key
+          breaked = true
+          break
+        end
+      end
+      if not breaked then
+        new_hl = "@lsp.type." .. tok.type
+      end
       if new_hl ~= hl then
         table.insert(result, { text, hl })
         text = ""

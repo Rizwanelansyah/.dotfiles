@@ -9,6 +9,5 @@ return {
   config = function()
     require("laravel").setup(V.opt("laravel"))
   end,
-  event = "VeryLazy",
   ft = { "blade", "php" },
 }
