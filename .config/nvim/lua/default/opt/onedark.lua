@@ -75,6 +75,7 @@ return {
     FoldColumn = { fg = "$blue", bg = "none" },
     CursorLine = { bg = "none" },
     NvimTreeCursorLine = { bg = "$bg2" },
+    ["@function.call"] = { fg = "$blue" },
 },
 
   -- Plugins Config --

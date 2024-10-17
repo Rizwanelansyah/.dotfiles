@@ -4,7 +4,7 @@ return {
     "nvim-telescope/telescope.nvim",
     "tpope/vim-dotenv",
     "MunifTanjim/nui.nvim",
-    "nvimtools/none-ls.nvim",
+    "kevinhwang91/promise-async",
   },
   config = function()
     require("laravel").setup(V.opt("laravel"))

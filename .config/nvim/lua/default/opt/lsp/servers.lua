@@ -24,5 +24,6 @@ return {
     }
   end,
   tailwindcss = {},
+  ts_ls = {},
   intelephense = {},
 }

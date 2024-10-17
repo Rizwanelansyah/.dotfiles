@@ -10,23 +10,30 @@ local fold_hls = {
 
 function _G.core_options_status_column_func()
   if vim.wo.number then
-    local foldable = require("nvim-treesitter.fold").get_fold_indic(vim.v.lnum):match("[^%d]+") ~= nil
-    local nextfoldable = (require("nvim-treesitter.fold").get_fold_indic(vim.v.lnum + 1) or ""):match("[^%d]+") ~= nil
+    local foldable = require("nvim-treesitter.fold").get_fold_indic(vim.v.lnum):match("[^%d]+") ~= nil or vim.fn.foldclosed(vim.v.lnum) == vim.v.lnum
+    local nextfoldable = (require("nvim-treesitter.fold").get_fold_indic(vim.v.lnum + 1) or ""):match("[^%d]+") ~= nil or vim.fn.foldclosed(vim.v.lnum + 1) == vim.v.lnum + 1
     local foldstart = vim.fn.foldclosed(vim.v.lnum)
     local foldlevel = vim.fn.foldlevel(vim.v.lnum)
     local nextfoldlevel = vim.fn.foldlevel(vim.v.lnum + 1)
     local folded = foldstart > 0
     local foldindicator = "  "
     local foldhl = fold_hls[((foldlevel - 1) % #fold_hls) + 1]
-    if foldlevel > 0 then
-      if (nextfoldable and nextfoldlevel == foldlevel) or nextfoldlevel < foldlevel then
+    if not foldable and foldlevel > 0 then
+      if vim.v.virtnum == 0 and (nextfoldable and nextfoldlevel == foldlevel) or nextfoldlevel < foldlevel then
         foldindicator = "%(%#" .. foldhl .. "#└ %)"
+      elseif vim.v.virtnum > 0 then
+        foldindicator = "  "
       else
         foldindicator = "%(%#" .. foldhl .. "#│ %)"
       end
     end
     local foldsign = foldable and (folded and "%(%#" .. foldhl .. "# %)" or "%(%#" .. foldhl .. "# %)")
-    return (foldsign or foldindicator) .. "%s%=" .. (folded and "%#FoldColumn#" or "") .. "%l "
+    local lnum_display = (vim.v.virtnum == 0 and (vim.wo.relativenumber and (vim.v.relnum == 0 and vim.v.lnum or vim.v.relnum) or vim.v.lnum) or "")
+    return (foldsign or foldindicator)
+      .. "%s%="
+      .. (folded and "%#FoldColumn#" or "")
+      .. lnum_display
+      .. " "
   else
     return ""
   end
@@ -43,17 +50,11 @@ local function fold_virt_text(result, s, lnum, coloff)
     local tokens = vim.lsp.semantic_tokens.get_at_pos(0, lnum, coloff + i - 1)
     local tok = tokens and tokens[#tokens]
     if tok then
-      local new_hl = "@lsp.typemod." .. tok.type
-      local breaked = false
-      for key, value in pairs(tok.modifiers) do
-        if value then
-          new_hl = new_hl .. "." .. key
-          breaked = true
-          break
-        end
-      end
-      if not breaked then
-        new_hl = "@lsp.type." .. tok.type
+      local new_hl
+      if tok.modifiers.defaultLibrary then
+        new_hl = "@lsp.typemod." .. tok.type
+      else
+        new_hl = "@lsp.type." .. tok.type .. ".defaultLibrary"
       end
       if new_hl ~= hl then
         table.insert(result, { text, hl })
@@ -101,9 +102,14 @@ function _G.core_options_foldtext_func()
   local end_ = vim.trim(end_str)
   local result = {}
   fold_virt_text(result, start, vim.v.foldstart - 1)
-  if vim.bo.ft == "markdown" then
+  if (vim.bo.ft == "markdown") or (vim.bo.ft == "php" and vim.fn.getline(vim.v.foldstart + 1):match("^%s*use")) then
     table.insert(result, { " ~~", "String" })
   else
+    local nextline = vim.fn.getline(vim.v.foldstart + 1)
+    if vim.bo.ft == "php" and nextline:match("^%s*%{%s*$") then
+      table.insert(result, { " " })
+      fold_virt_text(result, vim.trim(nextline), vim.v.foldstart, #(nextline:match("^(%s+)") or ""))
+    end
     table.insert(result, { "   ", "Comment" })
     fold_virt_text(result, end_, vim.v.foldend - 1, #(end_str:match("^(%s+)") or ""))
   end
@@ -127,3 +133,4 @@ vim.opt.foldtext = "v:lua.core_options_foldtext_func()"
 vim.opt.statuscolumn = "%{%v:lua.core_options_status_column_func()%}"
 vim.opt.cursorline = true
 vim.opt.signcolumn = "yes"
+vim.opt.relativenumber = true
