@@ -160,7 +160,7 @@ local function recent_files(width, max)
   return files
 end
 
-local function pad(val)
+local function space(val)
   return {
     type = "padding",
     val = val or 1,
@@ -208,7 +208,7 @@ local quote = quotes[vim.fn.rand() % #quotes + 1]
 local recent_files_width = 70
 
 local layout = {
-  pad(),
+  space(),
   header,
   group(function()
     local stats = require("lazy").stats()
@@ -253,7 +253,7 @@ local layout = {
   end, {
     spacing = 0,
   }),
-  pad(),
+  space(),
   group({
     button(" ", "Open File Explorer", function()
       vim.cmd.NvimTreeOpen()
@@ -293,7 +293,10 @@ local layout = {
     button(" ", "Exit", function()
       vim.cmd.q()
     end, { shortcut = "q" }),
-  }),
+  }, {
+      spacing = 0,
+    }),
+  space(),
   group({
     colored_text(
       { "%d~%$%tRecent Files%$%d:%$ %d(%$%p" .. vim.fn.getcwd() .. "%$%d)%$" },
@@ -307,7 +310,7 @@ local layout = {
   }, {
     spacing = 0,
   }),
-  pad(),
+  space(),
   group({
     text(function()
       return string.format('"%s"', quote.content)

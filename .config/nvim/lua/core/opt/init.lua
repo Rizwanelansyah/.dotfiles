@@ -110,7 +110,7 @@ function _G.core_options_foldtext_func()
       table.insert(result, { " " })
       fold_virt_text(result, vim.trim(nextline), vim.v.foldstart, #(nextline:match("^(%s+)") or ""))
     end
-    table.insert(result, { "   ", "Comment" })
+    table.insert(result, { " ... ", "Comment" })
     fold_virt_text(result, end_, vim.v.foldend - 1, #(end_str:match("^(%s+)") or ""))
   end
 
