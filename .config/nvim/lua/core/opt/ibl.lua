@@ -1,13 +1,3 @@
-local highlight = {
-  "RainbowDelimiterRed",
-  "RainbowDelimiterBlue",
-  "RainbowDelimiterGreen",
-  "RainbowDelimiterOrange",
-  "RainbowDelimiterViolet",
-  "RainbowDelimiterCyan",
-  "RainbowDelimiterYellow",
-}
-
 ---@type ibl.config
 return {
   scope = {
@@ -17,6 +7,5 @@ return {
   },
   indent = {
     char = "▏",
-    highlight = highlight,
   },
 }

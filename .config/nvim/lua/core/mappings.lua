@@ -53,3 +53,5 @@ end, { desc = "hover.nvim (next source)" })
 vim.keymap.set('n', '<leader>Fc', "<cmd>Fidget clear<cr>", { desc = "Fidget :: Clear" })
 vim.keymap.set('n', '<leader>FC', "<cmd>Fidget clear_history<cr>", { desc = "Fidget :: Clear History" })
 vim.keymap.set('n', '<leader>Fh', "<cmd>Fidget history<cr>", { desc = "Fidget :: Show History" })
+
+require('leap').create_default_mappings()
