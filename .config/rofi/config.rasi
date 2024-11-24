@@ -1,6 +1,6 @@
 configuration {
-  modes: "drun,run,window,emoji";
-  font: "HexaCode 12";
+  modes: "drun,run,window";
+  font: "JetBrainsMono 8";
   fixed-num-lines: true;
   show-icons: true;
   icon-theme: "Fluent-dark";

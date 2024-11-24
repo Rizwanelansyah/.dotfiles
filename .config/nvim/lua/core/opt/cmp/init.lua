@@ -14,7 +14,7 @@ return {
   window = {
     completion = {
       scrollbar = false,
-      border = border,
+      border = "none",
       winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,CursorLine:PmenuSel",
     },
     documentation = { scrollbar = false, border = "single", winhighlight = "Normal:Normal,FloatBorder:Normal" },

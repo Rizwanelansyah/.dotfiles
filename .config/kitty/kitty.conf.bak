@@ -1,4 +1,4 @@
-font_family      HexaCode
+font_family      Comic Mono
 font_size 10
 force_ltr yes
 disable_ligatures never
@@ -7,7 +7,7 @@ text_fg_override_threshold 0
 
 modify_font cell_width 110%
 modify_font cell_height 110%
-modify_font underline_position 1
+modify_font underline_position 0
 # cursor none
 cursor_beam_thickness 0.3
 cursor_underline_thickness 0.3
@@ -15,7 +15,6 @@ cursor_shape block
 cursor_blink_interval 0
 
 window_padding_width 2
-
 url_style curly
 open_url_with default
 show_hyperlink_targets yes
@@ -25,9 +24,3 @@ shell fish
 editor nvim
 shell_integration no-cursor
 linux_display_server wayland
-
-
-# BEGIN_KITTY_THEME
-# Gruvbox Dark
-include current-theme.conf
-# END_KITTY_THEME

@@ -2,7 +2,7 @@ local alphrim, alphsec = "#56A634", "#1788CE"
 
 return {
   style = "darker", -- Default theme style. Choose between 'dark', 'darker', 'cool', 'deep', 'warm', 'warmer' and 'light'
-  transparent = true, -- Show/hide background
+  transparent = false, -- Show/hide background
   term_colors = true, -- Change terminal color as per the selected theme style
   ending_tildes = false, -- Show the end-of-buffer tildes. By default they are hidden
 
@@ -73,7 +73,6 @@ return {
     SniprunVirtualTextOk = { fg = "$grey", bg = "none" },
     SniprunVirtualTextErr = { fg = "$red", bg = "none" },
     FoldColumn = { fg = "$blue", bg = "none" },
-    CursorLine = { bg = "none" },
     NvimTreeCursorLine = { bg = "$bg2" },
     ["@function.call"] = { fg = "$blue" },
 },

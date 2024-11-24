@@ -52,26 +52,9 @@ export PATH="$HOME/.config/composer/vendor/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.luarocks/bin:$PATH"
 
-# java
-export PATH="$HOME/.jenv/bin:$PATH"
-eval "$(jenv init -)"
-
-# bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
-
 # wine
 export WINE_ROOT="$HOME/.wine"
 export WINE_HOME="$WINE_ROOT/drive_c/users/$USER"
 
-# flutter
-export PATH="$HOME/Tools/flutter/bin:$PATH"
-export FLUTTER_ROOT="$HOME/Tools/flutter"
-
-# Android SDK
-export ANDROID_HOME="$HOME/Tools/Android/SDK"
-
 alias fishr="source $HOME/.config/fish/config.fish"
 alias ls="exa --icons=always"
-
-set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME ; set -gx PATH $HOME/.cabal/bin /home/rizwan/.ghcup/bin $PATH # ghcup-env

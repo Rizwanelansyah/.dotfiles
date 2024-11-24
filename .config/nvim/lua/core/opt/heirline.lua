@@ -72,34 +72,11 @@ local ViMode = {
 
   {
     {
-      provider = "",
-      hl = function(self)
-        return { fg = self.mode_colors[self.mode], bg = "bg0" }
-      end,
-    },
-
-    {
       provider = function(self)
-        return self.mode_icons[self.mode]
+        return " " .. self.mode_icons[self.mode] .. " " .. self.mode_names[self.mode] .. " "
       end,
       hl = function(self)
-        return { bg = self.mode_colors[self.mode], fg = "bg1" }
-      end,
-    },
-
-    {
-      provider = function(self)
-        return " " .. self.mode_names[self.mode] .. " "
-      end,
-      hl = function(self)
-        return { bg = "bg1", fg = self.mode_colors[self.mode], bold = true }
-      end,
-    },
-
-    {
-      provider = "",
-      hl = function()
-        return { bg = "bg0", fg = "bg1" }
+        return { fg = self.mode_colors[self.mode] }
       end,
     },
   },
@@ -121,18 +98,11 @@ local File = {
 
   {
     {
-      provider = "",
-      hl = function(self)
-        return { fg = self.color, bg = "bg0" }
-      end,
-    },
-
-    {
       provider = function(self)
         return self.icon .. " "
       end,
       hl = function(self)
-        return { bg = self.color, fg = "bg1" }
+        return { fg = self.color }
       end,
     },
 
@@ -142,10 +112,10 @@ local File = {
         if not conditions.width_percent_below(#filename, 0.25) then
           filename = vim.fn.pathshorten(filename)
         end
-        return " " .. filename .. " "
+        return filename .. " "
       end,
       hl = function(self)
-        return { bg = "bg1", fg = self.color }
+        return { fg = self.color }
       end,
 
       {
@@ -165,13 +135,6 @@ local File = {
           hl = { fg = "yellow" },
         },
       },
-    },
-
-    {
-      provider = "",
-      hl = function()
-        return { bg = "bg0", fg = "bg1" }
-      end,
     },
   },
 }
@@ -214,15 +177,10 @@ local LspClients = {
       local color = self.custom_color[server.name] or "green"
       local child = {
         {
-          provider = "",
-          hl = { fg = color },
-          {
-            { provider = icon, hl = { fg = "bg1", bg = color } },
-            { provider = " " .. server.name, hl = { fg = color, bg = "bg1" } },
-            { provider = ":", hl = { fg = "fg", bg = "bg1" } },
-            { provider = server.id, hl = { fg = "yellow", bg = "bg1" } },
-            { provider = "", hl = { fg = "bg1" } },
-          },
+          { provider = icon, hl = { fg = color } },
+          { provider = server.name, hl = { fg = color } },
+          { provider = ":", hl = { fg = "fg" } },
+          { provider = server.id .. " ", hl = { fg = "yellow" } },
         },
       }
       table.insert(children, child)
@@ -241,20 +199,18 @@ local Git = {
     self.status_dict = vim.b.gitsigns_status_dict
     self.has_changes = self.status_dict.added ~= 0 or self.status_dict.removed ~= 0 or self.status_dict.changed ~= 0
   end,
-  hl = { fg = "orange" },
-  provider = "",
   {
     {
       provider = function()
         return " "
       end,
-      hl = { bold = true, bg = "orange", fg = "bg1" },
+      hl = { fg = "orange" },
     },
     {
       provider = function(self)
-        return " " .. self.status_dict.head
+        return self.status_dict.head
       end,
-      hl = { bold = true, bg = "bg1", fg = "orange" },
+      hl = { bold = true, fg = "orange" },
 
       {
         condition = function(self)
@@ -290,7 +246,6 @@ local Git = {
         provider = ")",
       },
     },
-    { provider = "", hl = { fg = "bg1", bg = "bg0" } },
   },
 }
 
@@ -299,22 +254,20 @@ local diag = function(name, icon_name, color)
     condition = function(self)
       return self[name] > 0
     end,
-    { provider = "", hl = { fg = color } },
     {
       {
         provider = function(self)
           return self[icon_name]
         end,
-        hl = { fg = "bg1", bg = color, bold = true },
+        hl = { fg = color, bold = true },
       },
       {
         provider = function(self)
-          return " " .. self[name]
+          return self[name] .. " "
         end,
-        hl = { fg = color, bg = "bg1", bold = true },
+        hl = { fg = color, bold = true },
       },
     },
-    { provider = " ", hl = { fg = "bg1" } },
   }
 end
 
@@ -345,36 +298,20 @@ local Diagnostics = {
 }
 
 local Ruler = {
-  provider = "",
-  hl = { fg = "yellow", bg = "bg0" },
+  { provider = "%l", hl = { fg = "blue" } },
+  { provider = "/", hl = { fg = "yellow" } },
+  { provider = "%L", hl = { fg = "red" } },
+  { provider = ":", hl = { fg = "yellow" } },
+  { provider = "%c", hl = { fg = "green" } },
   {
-    { provider = " ", hl = { fg = "bg1", bg = "yellow" } },
-    {
-      provider = " ",
-      hl = { bg = "bg1" },
-      {
-        { provider = "%l", hl = { fg = "blue" } },
-        { provider = " / ", hl = { fg = "yellow" } },
-        { provider = "%L", hl = { fg = "red" } },
-        { provider = " : ", hl = { fg = "yellow" } },
-        { provider = "%2c", hl = { fg = "green" } },
-        {
-          provider = function()
-            local percentage = "  0"
-            local buflines = vim.api.nvim_buf_line_count(0)
-            local curline = vim.api.nvim_win_get_cursor(0)[1]
-            percentage = tostring(math.floor((curline / buflines) * 100))
-            while #percentage < 3 do
-              percentage = " " .. percentage
-            end
-            return " " .. percentage
-          end,
-          hl = { fg = "orange" },
-        },
-        { provider = "  ", hl = { fg = "orange" } },
-      },
-    },
-    { provider = "", hl = { fg = "bg1" } },
+    provider = function()
+      local percentage = "0"
+      local buflines = vim.api.nvim_buf_line_count(0)
+      local curline = vim.api.nvim_win_get_cursor(0)[1]
+      percentage = tostring(math.floor((curline / buflines) * 100))
+      return " " .. percentage .. "%%"
+    end,
+    hl = { fg = "orange" },
   },
 }
 
@@ -486,7 +423,7 @@ local TablineCloseButton = {
   end,
   { provider = " " },
   {
-    provider = "  ",
+    provider = " X ",
     hl = { fg = "red" },
     on_click = {
       callback = function(_, minwid)
@@ -507,7 +444,7 @@ local TablineBufferBlock = {
   hl = function(self)
     return { bg = self.is_active and "bg0" or "black" }
   end,
-  { TablineFileNameBlock, TablineCloseButton }
+  { TablineFileNameBlock, TablineCloseButton },
 }
 
 local BufferLine = utils.make_buflist(
@@ -518,15 +455,10 @@ local BufferLine = utils.make_buflist(
 
 local navic = require("nvim-navic")
 local NavicLabel = {
-  provider = "",
-  hl = { fg = "blue", bg = "bg0" },
+  { provider = " ", hl = { fg = "blue" } },
   {
-    { provider = " ", hl = { fg = "bg1", bg = "blue" } },
-    {
-      provider = " Navic",
-      hl = { bg = "bg1", fg = "blue" },
-    },
-    { provider = "", hl = { fg = "bg1" } },
+    provider = " Navic",
+    hl = { fg = "blue" },
   },
 }
 
@@ -584,7 +516,7 @@ local Navic = {
 }
 
 config.statusline = {
-  hl = { bg = "bg0", fg = "fg" },
+  hl = { fg = "fg" },
   ViMode,
   { provider = " " },
   File,

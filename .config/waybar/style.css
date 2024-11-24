@@ -23,7 +23,7 @@
 
 * {
   font-family: "JetBrainsMono Nerd Font", monospace;
-  font-size: 11px;
+  font-size: 10px;
   margin: 0;
   padding: 0;
 }
@@ -38,11 +38,12 @@ window#waybar {
 
 #workspaces {
   margin-left: .5em;
-  padding: .2em;
+  padding: 2px .2em;
 }
 
 #workspaces > button {
   font-weight: bold;
+  color: @fg;
   border-radius: 3px;
   padding: 0 .4em;
   margin: 0;
@@ -58,7 +59,7 @@ window#waybar {
   background: @bg1;
   padding: 0 1em;
   border-radius: 1em;
-  margin:  5px;
+  margin: 2px 5px;
 }
 
 #clock,
